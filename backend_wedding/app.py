@@ -34,7 +34,7 @@ class NameSurname(db.Model):
 class FormResponse(db.Model):
     name_surname = db.Column(db.String(100), db.ForeignKey('name_surname.name_surname'), primary_key=True)
     user_username = db.Column(db.String(80), db.ForeignKey('user.username'), primary_key=True)
-    accepted = db.Column(db.Boolean, nullable=False)
+    accepted = db.Column(db.Boolean, nullable=True)  # stavila sam na nullable True jer zelim da je na pocetku True
     menu_option = db.Column(db.String(80), nullable=True)
     allergies = db.Column(db.String(500), nullable=True)
     comment = db.Column(db.String(500), nullable=True)
@@ -128,12 +128,19 @@ def add_name_surname():
 
 @app.route('/api/namesurnames/<name_surname>', methods=['DELETE'])
 def delete_name_surname(name_surname):
+    # First delete all related form_response entries
+    form_responses = FormResponse.query.filter_by(name_surname=name_surname).all()
+    for response in form_responses:
+        db.session.delete(response)
+
+    # Now delete the name_surname entry
     name_surname_entry = NameSurname.query.filter_by(name_surname=name_surname).first()
     if name_surname_entry:
         db.session.delete(name_surname_entry)
         db.session.commit()
         return jsonify({'message': 'Name and surname deleted successfully'}), 200
     return jsonify({'error': 'Name and surname not found'}), 404
+
 
 @app.route('/api/name_surnames/<user_username>', methods=['GET'])
 def get_name_surnames(user_username):
