@@ -1,9 +1,21 @@
 /* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=WindSong:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Qwitcher+Grypen:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Questrial&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Questrial&family=Tangerine:wght@400;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Ephesis&family=Fleur+De+Leah&family=Questrial&family=Tangerine:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ephesis&family=Fleur+De+Leah&family=Hurricane&family=Questrial&family=Tangerine:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap');
 
-/* Global styles */
+
+html {
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Manrope', sans-serif; /*Questrial*/
   margin: 0;
   padding: 0;
   background-color: #fafafa; /* Slightly off-white background */
@@ -48,7 +60,11 @@ button:hover {
   background-repeat: no-repeat;
   background-size: cover;
   z-index: -1;
-    background-attachment: initial;
+  background-attachment: initial;
+  /* object-fit: cover; */
+  overflow: hidden;
+  object-fit: cover;
+  min-width: 250px;
 }
 
 .background-text {
@@ -56,27 +72,45 @@ button:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  font-family: 'WindSong', cursive;
-  font-size: 3em;
+  color: gray;
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+  font-family: 'Qwitcher Grypen', cursive;
+  font-size: 4rem;
   padding: 10px;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  /* background: rgba(0, 0, 0, 0.1); */
+  /* border-radius: 10px; */
   max-width: 80%;
+  z-index: 2;
+  margin-top: 20vh;
+  text-align: center;
 }
 
 .separator {
-  position: relative;
-  width: 100%;
-  height: 20vh; /* Height of the separator */
-  background-image: url('../public/image_separator.png'); /* Adjust path as necessary */
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* height: 100px; */
   z-index: 1;
-  margin-top: -10vh; /* Overlap the separator slightly with the image */
+  /* position: relative;
+  width: 100%; */
+  height: 100vh; /* Height of the separator */
+  /*background-image: url('../public/image_separator.png'); /* mislim da ovo ne igra nikakvu ulogu */ 
+  /*background-position: bottom;
+  /*background-repeat: no-repeat;
+  /*background-size: cover; *
+  margin-top: -20vh; /* Overlap the separator slightly with the image */
+  background: linear-gradient(to bottom, transparent, #fafafa);
 }
+
+/* .separator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, #fafafa);
+} */
 
 .content {
   position: relative;
@@ -108,12 +142,28 @@ form label {
 form input[type="text"],
 form textarea,
 form select {
-  width: calc(100% - 20px);
+  /* width: calc(100% - 20px); */
   padding: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   border: 1px solid #ddd;
   border-radius: 5px;
   font-family: 'Raleway', sans-serif;
+}
+form input[type="text"]:focus,
+form input[type="password"],
+form textarea:focus,
+form select:focus {
+  color: rgb(82, 57, 26); /* Change this to your desired text color */
+  /* border-color: burlywood; Optional: Change border color on focus */
+  outline: none; /* Optional: Remove default outline */
+}
+input[type="password"] {
+  -webkit-appearance: none; /* Hide default styling in WebKit browsers */
+  appearance: none; /* Hide default styling in other browsers */
+}
+input[type="password"]:focus {
+  -webkit-appearance: none; /* Hide default styling in WebKit browsers */
+  appearance: none; /* Hide default styling in other browsers */
 }
 
 form input[type="checkbox"] {
@@ -143,19 +193,42 @@ ul {
 ul li {
   background-color: #fff;
   padding: 20px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Admin panel specific styles */
 .admin-container {
-  display: flex;
+  display: relative;
+  flex-direction: column; /* Stack panels vertically */
+  align-items: center; /* Center items horizontally */
   justify-content: space-between;
+  margin: 0 auto;
+  margin-top: 50px;
 }
 
 .admin-panel {
-  width: 48%;
+  /* width: 48%; */
+  display: block;
+  margin: 0 auto;
+  justify-content: center;
+  padding: 5%;
+  width: 80%;
+  min-width: '250px';
+
+  background-color: #fafafa;
+  padding: 2rem;
+  /* margin-top: 50px; */
+  /* position: relative; */
+  /* width: 55%; */
+  /* min-width: 200px; */
+  /* margin: 0 auto; */
+}
+.admin-panel h2, h3{
+  font-family: 'Raleway', sans-serif;
+  margin: 0 auto;
+  text-align: center;
 }
 
 textarea {
@@ -163,4 +236,965 @@ textarea {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
+}
+
+
+
+.admin-panel ul {
+  padding: 0; /* Remove default padding */
+}
+
+.admin-panel li {
+  position: relative; /* Allow positioning of the trash icon */
+  background-color: #fff; /* White background for user items */
+  padding: 15px; /* Add padding for better spacing */
+  margin-bottom: 10px; /* Space between user items */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.admin-panel li .trash-icon-user {
+  position: absolute; /* Position the icon absolutely */
+  top: 10px; /* Align to the top */
+  right: 20px; /* Align to the right */
+  cursor: pointer; /* Pointer cursor for button */
+  padding: 7px;
+  font-size: 1em;
+  background-color: brown;
+}
+.admin-panel li .trash-icon-guest {
+  position: absolute; /* Position the icon absolutely */
+  top: 10px; /* Align to the top */
+  right: 20px; /* Align to the right */
+  cursor: pointer; /* Pointer cursor for button */
+  padding: 4px;
+  font-size: 0.7em;
+  background-color: rgb(211, 92, 92);
+}
+.admin-panel li strong {
+  position: relative; /* Position the icon absolutely */
+  /*top: 0px; /* Align to the top */
+  left: 20px; /* Align to the right */
+  padding: 0;
+  font-size: 1.5em;
+}
+.admin-panel button {
+  width: auto; /* Set button width to auto */
+  /*padding: 8px 12px; /* Adjust padding for buttons */
+  /*margin-top: 5px; /* Space above buttons */
+  padding: 4px 8px;
+}
+.admin-panel h3 {
+  margin-bottom: 8px;
+}
+.admin-panel-users-container {
+  width: 50%;
+  min-width: 250px;
+  margin: 0 auto;
+  /* display: relative;
+  flex-direction: column;
+  align-items: center; */
+}
+.admin-panel-users-container button {
+  margin: 0 auto;
+}
+.add-user{
+  margin: 0 auto;
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center;
+  min-width: 150px;
+}
+.admin-panel-users-options {
+  display: relative;
+  margin-bottom: 2px;
+}
+
+
+
+
+
+/* Hero container styles */
+.hero-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  min-width: 300px;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: gray;
+  font-size: 2rem;
+  text-align: center;
+  font-family: 'WindSong', cursive;
+  /* font-family: 'Fleur De Leah', cursive; */
+  z-index: 2; /* Ensure text is above the separator */
+  margin-top: 20vh;
+}
+
+.hero-text h1 {
+  font-family: 'WindSong', cursive;
+  /* font-family: 'Fleur De Leah'; */
+  font-weight: 20; /* Set to a lighter weight, adjust as needed */
+  font-size: 3rem; /* Adjust font size if necessary */
+  /* color: gray; Ensure the color is set as desired */
+}
+
+.user-message {
+  font-size: 0.7em;
+  font-family: 'Ephesis';
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  margin-top: 10vh;
+  margin-bottom: 0px;
+  color: rgb(82, 57, 26);
+
+  width: 0; /* Start with width 0 */
+  animation: typing 2s steps(1000, end) forwards; /* Adjust duration and steps */
+  animation-delay: 0.8s;
+
+  z-index: 2;
+  left: 0%;
+  display: flex;
+  padding: auto;
+  position: relative;
+}
+
+.content-container {
+  background-color: #fafafa;
+  padding: 2rem;
+  position: relative;
+  width: 55%;
+  min-width: 250px;
+  margin: 0 auto;
+  margin-top: 80px;
+  max-width: 600px;
+}
+/* Responsive styles for small screens */
+@media (max-width: 1100px) {
+  .content-container {
+    width: 70%; /* Increase width to 90% for small screens */
+    padding: 1rem; /* Reduce padding if necessary */
+    /* min-width: 250px; */
+  }
+}
+@media (max-width: 900px) {
+  .content-container {
+    width: 80%; /* Increase width to 90% for small screens */
+    padding: 1rem; /* Reduce padding if necessary */
+    /* min-width: 250px; */
+  }
+}
+@media (max-width: 600px) {
+  .content-container {
+    width: 90%; /* Increase width to 90% for small screens */
+    padding: 1rem; /* Reduce padding if necessary */
+    /* min-width: 250px; */
+  }
+}
+/* Responsive styles for very small screens */
+@media (max-width: 500px) {
+  .content-container {
+    width: 95%; /* Increase width to 95% for very small screens */
+    padding: 0.5rem; 
+  }
+}
+.content-container h3 {
+  font-family: 'Hurricane';
+  font-weight: 400;
+  font-size: 50px;
+}
+
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  /* width: 100%; */
+  /* box-sizing: border-box;
+  padding: 20px; */
+}
+
+/* Common form styles */
+form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+input, button {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: burlywood;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: darkgoldenrod;
+}
+
+.language-toggle {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  width: auto !important;
+  min-width: 40px;
+  max-width: 60px;
+  background-color: burlywood;
+  color: white;
+  border: none;
+  padding: 7px 0px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  /* font-weight: bold; */
+  border-radius: 2px;
+  transition: background-color 0.3s;
+  z-index: 1000;
+  display: inline-block;
+  text-align: center;
+}
+
+
+
+.logout-button {
+  position: fixed;
+  top: 10px;
+  right: 70px;
+  width: auto; /* Ensure the button doesn't stretch */
+  height: 30px;
+  min-width: 40px; /* Minimum width to fit the text */
+  background-color: burlywood;
+  color: white;
+  border: none;
+  padding: 7px 12px;
+  padding-top: 4px;;
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 2px;
+  transition: background-color 0.3s;
+  z-index: 1000;
+  display: inline-block; /* Prevent full-width behavior */
+  text-align: center;
+}
+
+
+
+
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 1200px) {
+  .hero-text h1 {
+    font-size: 2em;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .hero-text h1 {
+    font-size: 2em;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 1.2em;
+    /* padding: 0 15px; */
+  }
+}
+
+
+
+
+
+/* Update toggle switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block; /* Ensure it behaves like an inline element */
+  width: 100%; /* Allow it to take full width */
+  height: 34px; /* Height of the toggle switch */
+}
+
+.toggle-switch input {
+  opacity: 0; /* Hide the checkbox */
+  width: 0;
+  height: 0;
+}
+
+.toggle-label {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc; /* Background color of the toggle */
+  transition: 0.4s;
+  border-radius: 34px; /* Rounded corners */
+  padding: 0 50px; /* Add padding to create space for text */
+  display: flex; /* Use flexbox for centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  color: white; /* Text color */
+  font-size: 14px; /* Adjust font size as needed */
+}
+
+.toggle-label:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white; /* Color of the slider */
+  transition: 0.4s;
+  border-radius: 50%; /* Rounded slider */
+}
+
+.toggle-switch input:checked + .toggle-label {
+  background-color: #b4802d; /* Color when checked */
+}
+
+.toggle-switch input:checked + .toggle-label:before {
+  transform: translateX(26px); /* Move the slider */
+}
+
+
+
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 120px; /* Adjust width as needed */
+  height: 34px; /* Height of the toggle switch */
+  border-radius: 34px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor for the toggle */
+}
+
+.toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Text color */
+  transition: background-color 0.4s; /* Smooth transition for background color */
+  border-radius: 34px; /* Rounded corners */
+}
+
+.toggle-label:before {
+  content: '';
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white; /* Color of the slider */
+  transition: transform 0.4s; /* Smooth transition for the slider */
+  border-radius: 50%; /* Rounded slider */
+}
+
+.toggle-switch input:checked + .toggle-label:before {
+  transform: translateX(66px); /* Move the slider to the right */
+}
+
+
+
+
+
+.switch-toggle input {
+    opacity: 0;
+    height: 25px;
+    position: absolute;
+    border-radius: 15px;
+}
+
+.switch-toggle input + label {
+    float: left;
+    color: #fff;
+    height: 25px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.switch-toggle input[value="na"] + label {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.switch-toggle input[value="na"]:checked + label {
+    background: grey;
+}
+
+.switch-toggle input[value="on"]:checked + label {
+    background: green;
+}
+
+.switch-toggle input[value="off"]:checked + label {
+    background: red
+}
+
+
+
+.tri-state-toggle {
+    background: rgba(190, 174, 153, 0.894);
+    box-shadow: inset 0 2px 8px 0 rgba(165,170,174,0.25);
+    border-radius: 24px;
+    overflow: hidden;
+    display: inline-flex;  /* inline-flex */
+    flex-direction: row;
+    transition: all 500ms ease; 
+    right: 20px;
+    /* width: fit-content; */
+    position: absolute;
+  }
+
+.tri-state-toggle-button {
+    border-radius: 22px;
+    /* height: 44px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    background-color: transparent;
+    border: 0px solid transparent;
+    margin: 2px;
+    color: white;
+    cursor: pointer;
+    padding:1px;
+    margin-left: 2px;
+    margin-right: 2px;
+    font-size: 10px;
+    /* width: auto; */
+  
+/*    -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition:    all 0.5s ease-in-out;
+  -ms-transition:     all 0.5s ease-in-out;
+  -o-transition:      all 0.5s ease-in-out; */
+  transition:         all 0.5s ease;
+}
+@media (max-width: 900px) {
+  .tri-state-toggle-button {
+      font-size: 9px; /* Smaller font size for small screens */
+      width: 3rem;
+  }
+}
+@media (max-width: 700px) {
+  .tri-state-toggle-button {
+      font-size: 8px; /* Even smaller font size for very small screens */
+      width: 3rem;
+  }
+}
+@media (max-width: 400px) {
+  .tri-state-toggle-button {
+      font-size: 6px; /* Even smaller font size for very small screens */
+      width: 2rem;
+  }
+}
+
+.tri-state-toggle-button.active {
+  background-image: linear-gradient(
+                          90deg,
+                          rgb(179, 148, 107) 0%,
+                          rgb(188, 156, 115) 35%,
+                          burlywood 100%
+                        );
+  border: 0px solid rgba(207,207,207,0.6);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+  color: white;
+  font-weight: 500;
+  transition: all .5s ease-in;
+}
+
+.tri-state-toggle-button:focus {
+  outline: none;
+}
+
+.tri-state-toggle-button.active.tri-state-toggle-button-declined {
+  background-image: linear-gradient(
+                          90deg,
+                          rgb(113, 59, 58) 0%,
+                          rgb(149, 38, 32) 35%,
+                          rgba(200, 96, 94, 0.723) 100%
+                        );
+}
+.tri-state-toggle-button.active.tri-state-toggle-button-accepted {
+  background-image: linear-gradient(
+                          90deg,
+                          rgb(64, 94, 51) 0%,
+                          rgb(51, 110, 62) 35%,
+                          rgba(80, 163, 87, 0.586) 100%
+                        );
+}
+.tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
+  background-image: linear-gradient(
+                          90deg,
+                          rgb(121, 121, 121) 0%,
+                          rgb(161, 161, 161) 35%,
+                          rgb(207, 207, 207) 100%
+                        );
+}
+
+
+
+.guests-forms-container {
+  /*display: flex; /* Use flexbox for centering */
+  flex-direction: column; /* Align children vertically */
+  /*align-items: center; /* Center children horizontally */
+  /*justify-content: center; /* Center children vertically */
+  width: 70%; /* Set a narrow width */
+  /* min-width: 250px;
+  max-width: 500px; */
+  margin: 8px auto; /* Center the container horizontally */
+  padding: 0 20px; /* Optional: Add some padding for spacing */
+  border: 1px solid #ffffff; /* Optional: Add a border for visual clarity */
+  box-shadow: 0 2px 4px rgba(150, 150, 150, 0.1); /* Optional: Add a subtle shadow */
+  background-color: #ffffff; /* Optional: Set a background color */
+
+  position: relative;
+  font-family: 'Raleway';
+  /* font-weight: 60; */
+  font-size: 0.7rem;
+}
+/* Reset margins for common elements */
+.guests-forms-container div {
+  margin: 0; /* Remove default margins */
+  /* max-width: 400px; */
+}
+.guests-forms-container label{
+  margin: 0;
+} 
+
+.guest-input-menu {
+  display: flex;
+  align-items: center;
+  white-space: nowrap; 
+  font-weight: 400;
+  padding: 1px;
+}
+
+.update-changes-button {
+  width: 30%; /* Set a narrow width */
+  min-width: 250px;
+  margin: 10px auto;
+  margin-bottom: 50px;
+}
+
+
+
+.timeline {
+  position: relative;
+  width: 10%;
+  /*max-width: 800px; /* Set a maximum width for the timeline */
+  margin: 0 auto; /* Center the timeline horizontally */
+  padding: 20px 0; /* Adjust padding to avoid extending the screen */
+}
+
+.event {
+  display: flex;
+  align-items: center;
+  position: relative;
+  /*width: 100%; /* Ensure each event takes full width of the container */
+  margin-bottom: 50px;
+}
+
+.event.left {
+  justify-content: flex-end; /* Align content to the right for left events */
+  padding-right: 50%; /* Push content to the left side */
+  transform: translateX(-50%); /* Center the left event */
+}
+
+.event.right {
+  justify-content: flex-start; /* Align content to the left for right events */
+  padding-left: 50%; /* Push content to the right side */
+  transform: translateX(50%); /* Center the right event */
+}
+
+.event .time {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.event.left .time {
+  order: 1;
+  margin-right: 0;
+  margin-left: 20px;
+}
+
+.event .event-content {
+  text-align: left;
+  padding: 10px;
+}
+
+.event.left .event-content {
+  order: 2;
+}
+
+.event.right .event-content {
+  order: 1;
+}
+
+.event .icon {
+  margin-right: 10px;
+}
+
+.event.left .icon {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background-color: black;
+  transform: translateX(-50%);
+}
+
+
+
+
+
+
+
+.event-table {
+  /* width: 100%; */
+  margin: 0 auto; /* Center the table */
+  position: relative;
+  width: 65%;
+  /*max-width: 800px; /* Set a maximum width for the timeline */
+  /*padding: 200px 0; /* Adjust padding to avoid extending the screen */
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-spacing: 0;
+  min-width: 250px;
+}
+
+.event-table td {
+  vertical-align: middle; /* Vertically center content in cells */
+  text-align: center; 
+  /* border: none; */
+  /* padding: 10px; */
+}
+
+.event-content {
+  /* text-align: left;
+  align-items: center;
+  justify-content: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; 
+  /*width: 50%; /* Ensure equal width for both columns */
+}
+
+.icon {
+  text-align: right;
+  width: 50%; /* Ensure equal width for both columns */
+}
+
+.icon img {
+  width: 6rem; /* Adjusted width for icons */
+  height: auto; /* Maintain aspect ratio */
+  /*max-width: 100%; /* Ensure it doesn't exceed the container's width */
+  margin-bottom: 30px;
+}
+
+.time {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.event-table td + td {
+  border-left: 2px solid rgb(45, 38, 20); /* Add a border between the columns */
+  /*border-collapse: collapse; /* Ensures borders are collapsed into a single line */
+}
+
+.event-table td {
+  vertical-align: middle; /* Vertically center content in cells */
+  text-align: center; 
+  padding: 0; /* Add padding for spacing */
+  height: 20rem; /* Set a specific height for the cells */
+}
+
+
+
+.time-line {
+  display: flex;
+  align-items: center; /* Center the time and line vertically */
+  width: 100%; /* Full width of the cell */
+}
+
+.time {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 10px; /* Space between time and line */
+  margin-left: 10px; /* Space between time and line */
+}
+
+.line {
+  flex-grow: 1; /* Allow the line to take remaining space */
+  height: 1px; /* Height of the line */
+  /*background-color: black; /* Color of the line */
+  border-top: 2px dotted black;
+}
+
+
+
+.table-of-contents{
+  display: flex;
+  justify-content: center; /* Horizontal center */
+  align-items: center;     /* Vertical center (optional) */
+}
+
+
+
+.footer {
+  /*background-color: #d2a442; /* Light background color */
+  padding: 25px; /* Padding for spacing */
+  text-align: center; /* Center text */
+  position: relative; /* Positioning */
+  bottom: 0; /* Stick to the bottom */
+  /* background: linear-gradient(to bottom, transparent, #d2a442); */
+  overflow: 'hidden';
+  background: linear-gradient(to bottom, rgba(210, 164, 66, 0.8), rgba(210, 164, 66, 0.5));
+  /* width: 100%; */
+  min-width: 250px;
+}
+
+.footer-content {
+  /*max-width: 800px; /* Max width for content */
+  margin: 0 auto; /* Center content */
+  /* overflow: 'hidden', */
+}
+
+.footer a {
+  color: #007bff; /* Link color */
+  text-decoration: none; /* Remove underline */
+}
+
+.footer a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+.footer h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: Hurricane;
+  font-size: 30px;
+  font-weight: 100;
+}
+
+.contact-container {
+  display: flex; /* Use flexbox for side-by-side layout */
+  justify-content: space-around; /* Space items evenly */
+  margin-top: 10px; /* Space above contact items */
+  width: 80%;
+  align-items: center;
+  margin: 0 auto;
+  white-space: nowrap;
+}
+
+.contact-item {
+  text-align: center; /* Center text in each item */
+  margin: 0 20px; /* Optional: Add some horizontal margin */
+  /* font-size: 1rem; */
+  flex: 1;
+  min-width: 100px; /* Minimum width for each item */
+  /* max-width: 200px; */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis if text overflows */
+  white-space: nowrap; /* Prevent text wrapping */
+  /* /* font-size: 1rem; */
+  position: relative; 
+}
+@media (max-width: 600px) {
+  .contact-item {
+    font-size: 0.9rem; /* Smaller font size for smaller screens */
+    margin: 0 auto;
+  }
+}
+@media (max-width: 400px) {
+  .contact-item {
+    font-size: 0.6rem; /* Even smaller font size for very small screens */
+    margin: 0 auto;
+  }
+}
+
+.contact-item a {
+  color: #25D366; /* WhatsApp color */
+  text-decoration: none; /* Remove underline */
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
+.whatsapp-icon {
+  color: gray; /* Change this to your desired color */
+  transition: color 0.3s; /* Optional: Add a transition for hover effect */
+}
+
+.whatsapp-icon:hover {
+  color: pink /* Change color on hover (optional) */
+}
+
+
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width:  100%;
+  }
+}
+.typing-effect {
+  /* font-family: 'Raleway', sans-serif; Use your desired font */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide the overflow */
+  width: 0; /* Start with width 0 */
+  animation: typing 0.8s steps(100, end) forwards; /* Adjust duration and steps */
+  animation-delay: 1s;
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(-100%); /* Start above the viewport */
+    opacity: 0; /* Start invisible */
+  }
+  100% {
+    transform: translateY(0); /* End at its original position */
+    opacity: 1; /* Fully visible */
+  }
+}
+.drop-effect {
+  animation: drop 2s ease forwards; /* 1 second duration, ease in */
+  text-align: center; /* Center text */
+  animation-delay: 3s;
+  opacity: 0;
+}
+
+
+.multiline-text {
+  white-space: pre-line; /* Preserve new lines */
+}
+
+
+
+.quote-container {
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center; /* Center text within the container */
+  margin-top: 90px;
+  margin-bottom: 120px;
+}
+
+.quote-text {
+  margin: 0 auto; /* Center the text block */
+}
+
+
+
+
+.transition-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 2s ease-in-out;
+}
+
+.transition-container.show {
+  max-height: 500px; /* or a value large enough to fit the content */
+  /* margin-left: 18px; */
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-width: 250px;
+  color:rgb(83, 83, 83);
+}
+
+
+
+
+.info-box {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  position: absolute;
+  bottom: 283px; /* Adjust as needed */
+  right: 10px; /* Default right position for larger screens */
+  z-index: 10;
+  font-size: 12px;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .info-box {
+      right: 10px; /* Adjust right position for small screens */
+  }
+}
+@media (max-width: 400px) {
+  .info-box {
+      left: 10px; /* Set left position for very small screens */
+      right: auto; /* Reset right to auto to avoid conflicts */
+  }
+}
+
+.error {
+  color: red; /* Set text color to red */
+  font-size: 12px; /* Set font size to smaller */
+  margin: 0 auto; /* Center the element */
+  text-align: center; /* Center the text */
+  width: fit-content; /* Adjust width to fit the content */
+}
+
+
+.confirm-arrival {
+  white-space: nowrap; /* Prevent text wrapping */
+  font-weight: 200; /* Set font weight */
+  text-align: center; /* Center the text */
+  font-size: 1rem; /* Default font size */
+  min-width: 50px; /* Minimum width */
+}
+@media (max-width: 600px) {
+  .confirm-arrival {
+    font-size: 0.8rem; /* Smaller font size for smaller screens */
+  }
+}
+@media (max-width: 400px) {
+  .confirm-arrival {
+    font-size: 0.6rem; /* Even smaller font size for very small screens */
+  }
 }

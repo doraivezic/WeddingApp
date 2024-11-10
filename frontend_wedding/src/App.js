@@ -10,7 +10,7 @@ import './global.css';
 const LanguageToggleButton = () => {
   const { language, toggleLanguage } = useContext(LanguageContext);
   return (
-    <button onClick={toggleLanguage} style={{ position: 'absolute', top: '10px', right: '10px' }}>
+    <button onClick={toggleLanguage} className="language-toggle">
       {language === 'en' ? 'EN' : 'HR'}
     </button>
   );
@@ -23,10 +23,11 @@ const LogoutButton = () => {
   const handleLogout = () => {
     logout();
     navigate('/');
+    window.scrollTo(0, 0);
   };
 
   return (
-    <button onClick={handleLogout} style={{ position: 'absolute', top: '10px', right: '80px' }}>
+    <button onClick={handleLogout} className="logout-button">
       Logout
     </button>
   );
