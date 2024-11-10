@@ -3,10 +3,11 @@ import '../global_old.css';
 
 const GuestList = () => {
   const [guests, setGuests] = useState([]);
+  const apiUrl = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
     const fetchGuests = async () => {
-      const response = await fetch('/api/guests');
+      const response = await fetch(`${apiUrl}/api/guests`);
       const data = await response.json();
       setGuests(data);
     };

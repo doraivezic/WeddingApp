@@ -6,7 +6,6 @@ import { LanguageContext } from '../contexts/LanguageContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faInfoCircle } from '@fortawesome/free-solid-svg-icons'; // Import eye icons
 
-
 const Home = () => {
   const { login } = useContext(AuthContext);
   const { language, toggleLanguage } = useContext(LanguageContext);
@@ -16,6 +15,7 @@ const Home = () => {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false); 
   const [showInfo, setShowInfo] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL || '';
 
   const togglePasswordVisibility = () => {
       setShowPassword(!showPassword); // Toggle the visibility state
@@ -30,7 +30,7 @@ const Home = () => {
     setError('');
 
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch(`${apiUrl}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

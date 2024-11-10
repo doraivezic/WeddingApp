@@ -8,10 +8,11 @@ const Login = () => {
   const [error, setError] = useState('');
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const apiUrl = process.env.REACT_APP_API_URL || '';
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await fetch('/api/login', {
+    const response = await fetch(`${apiUrl}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

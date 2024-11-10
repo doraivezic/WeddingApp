@@ -6,10 +6,11 @@ const GuestForm = () => {
   const [responses, setResponses] = useState([]);
   const [comment, setComment] = useState('');
   const [showCommentSection, setShowCommentSection] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
     const fetchFormResponses = async () => {
-      const response = await fetch(`/api/form_responses/${userUsername}`);
+      const response = await fetch(`${apiUrl}/api/form_responses/${userUsername}`);
       const data = await response.json();
       console.log(data); // Verify data in frontend
       if (response.ok) {
@@ -25,7 +26,7 @@ const GuestForm = () => {
   const handleUpdateChanges = async (e) => {
     e.preventDefault();
     const promises = responses.map(response =>
-      fetch('/api/form_responses', {
+      fetch(`${apiUrl}/api/form_responses`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ const GuestForm = () => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('/api/comments', {
+    const response = await fetch(`${apiUrl}/api/comments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -12,11 +12,12 @@ const Admin = () => {
   const [newNameSurname, setNewNameSurname] = useState('');
   const [editingMessage, setEditingMessage] = useState({});
   const [newUser, setNewUser] = useState({ username: '', password: '' });
+  const apiUrl = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('/api/users');
+        const response = await fetch(`${apiUrl}/api/users`);
         const data = await response.json();
         if (response.ok) {
           setUsers(data.filter(user => user.role !== 'admin'));
@@ -34,7 +35,7 @@ const Admin = () => {
   useEffect(() => {
     const fetchNameSurnames = async () => {
       try {
-        const response = await fetch('/api/namesurnames');
+        const response = await fetch(`${apiUrl}/api/namesurnames`);
         const data = await response.json();
         if (response.ok) {
           setNameSurnames(data);
@@ -52,7 +53,7 @@ const Admin = () => {
   useEffect(() => {
     const fetchFormResponses = async () => {
       try {
-        const response = await fetch('/api/form_responses');
+        const response = await fetch(`${apiUrl}/api/form_responses`);
         const data = await response.json();
         if (response.ok) {
           setFormResponses(data);
@@ -70,7 +71,7 @@ const Admin = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch('/api/comments');
+        const response = await fetch(`${apiUrl}/api/comments`);
         const data = await response.json();
         if (response.ok) {
           setComments(data);
@@ -89,7 +90,7 @@ const Admin = () => {
   const handleAddNameSurname = async (username) => {
     if (newNameSurname.trim() === '') return;
     try {
-      const response = await fetch('/api/namesurnames', {
+      const response = await fetch(`${apiUrl}/api/namesurnames`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -114,7 +115,7 @@ const Admin = () => {
   const handleDeleteNameSurname = async (name_guest) => {
     if (window.confirm(`Are you sure you want to delete guest ${name_guest}?`)) {
       try {
-        const response = await fetch(`/api/namesurnames/${name_guest}`, {
+        const response = await fetch(`${apiUrl}/api/namesurnames/${name_guest}`, {
           method: 'DELETE',
         });
         if (response.ok) {
@@ -134,7 +135,7 @@ const Admin = () => {
 
   const handleUpdateUser = async (username) => {
     try {
-      const response = await fetch(`/api/users/${username}`, {
+      const response = await fetch(`${apiUrl}/api/users/${username}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -159,7 +160,7 @@ const Admin = () => {
   const handleAddUser = async () => {
     if (newUser.username.trim() === '' || newUser.password.trim() === '') return;
     try {
-      const response = await fetch('/api/users', {
+      const response = await fetch(`${apiUrl}/api/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -181,7 +182,7 @@ const Admin = () => {
   const handleDeleteUser = async (username) => {
     if (window.confirm(`Are you sure you want to delete user ${username}?`)) {
       try {
-        const response = await fetch(`/api/users/${username}`, {
+        const response = await fetch(`${apiUrl}/api/users/${username}`, {
           method: 'DELETE',
         });
         if (response.ok) {

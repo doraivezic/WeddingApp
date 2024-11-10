@@ -5,7 +5,6 @@ import {LanguageContext} from "../contexts/LanguageContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'; // Import WhatsApp icon
 
-
 const GuestDetails = () => {
   const { userUsername } = useContext(AuthContext);
   const { language } = useContext(LanguageContext);
@@ -14,11 +13,12 @@ const GuestDetails = () => {
   const [comment, setComment] = useState('');
   const [showCommentSection, setShowCommentSection] = useState(false);
   const [userMessage, setUserMessage] = useState('');
+  const apiUrl = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const response = await fetch(`/api/users/${userUsername}`);
+        const response = await fetch(`${apiUrl}/api/users/${userUsername}`);
         const data = await response.json();
         if (response.ok) {
           setUserMessage(data.message);
@@ -36,7 +36,7 @@ const GuestDetails = () => {
   useEffect(() => {
     const fetchNameSurnamesAndInitializeResponses = async () => {
       try {
-        const nameSurnameResponse = await fetch(`/api/name_surnames/${userUsername}`);
+        const nameSurnameResponse = await fetch(`${apiUrl}/api/name_surnames/${userUsername}`);
         const nameSurnameData = await nameSurnameResponse.json();
         if (nameSurnameResponse.ok) {
           // setNameSurnames(nameSurnameData);
@@ -63,7 +63,7 @@ const GuestDetails = () => {
   useEffect(() => {
     const fetchFormResponses = async () => {
       try {
-        const response = await fetch(`/api/form_responses/${userUsername}`);
+        const response = await fetch(`${apiUrl}/api/form_responses/${userUsername}`);
         const data = await response.json();
         if (response.ok) {
           setResponses(prevResponses => {
@@ -95,7 +95,7 @@ const GuestDetails = () => {
   const handleUpdateChanges = async (e) => {
     e.preventDefault();
     const promises = responses.map(response =>
-      fetch('/api/form_responses', {
+      fetch(`${apiUrl}/api/form_responses`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ const GuestDetails = () => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('/api/comments', {
+    const response = await fetch(`${apiUrl}/api/comments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
