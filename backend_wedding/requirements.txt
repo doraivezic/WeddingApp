@@ -6,5 +6,4 @@ gunicorn==23.0.0
 SQLAlchemy==2.0.30
 itsdangerous==2.2.0
 Jinja2==3.1.2
-Werkzeug==2.3.8
 click==8.1.3
