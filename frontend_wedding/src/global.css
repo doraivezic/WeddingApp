@@ -10,6 +10,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap');
 
 
+:root {
+  --background-color: #fafafa; /* Slightly off-white background */
+  --text-color: #333;
+  --button-background-color: #d1a3a4; /* Soft pink color */
+  --button-hover-color: #c18d8f;
+  /* --separator-background: linear-gradient(to bottom, transparent, #fafafa); */
+  --input-border-color: #ddd;
+  --input-focus-color: rgb(82, 57, 26); /* Change this to your desired text color */
+  --whatsapp-color: #25D366; /* WhatsApp color */
+  --whatsapp-hover-color: rgb(57, 99, 53); /* Change color on hover (optional) */
+  /* --footer-background: linear-gradient(to bottom, rgba(210, 164, 66, 0.8), rgba(210, 164, 66, 0.5)); */
+  /* Add more color variables as needed */
+  --button-color: burlywood;
+  --button-color-hover: darkgoldenrod;
+}
+
+
 html {
   scroll-behavior: smooth; /* Enable smooth scrolling */
 }
@@ -18,14 +35,18 @@ body {
   font-family: 'Manrope', sans-serif; /*Questrial*/
   margin: 0;
   padding: 0;
-  background-color: #fafafa; /* Slightly off-white background */
-  color: #333;
+  background-color: var(--background-color); /* Slightly off-white background */
+  color: var(--text-color);
+
+  /* workaround to avoid dark theme on mobile devices */
+  background-image: linear-gradient(var(--background-color), var(--background-color)); 
+  z-index: 0;
 }
 
 button {
   font-family: 'Raleway', sans-serif;
-  background-color: #d1a3a4; /* Soft pink color */
-  color: #fff;
+  background-color: var(--button-background-color); /* Soft pink color */
+  color: white;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -35,7 +56,7 @@ button {
 }
 
 button:hover {
-  background-color: #c18d8f;
+  background-color: var(--button-hover-color);
 }
 
 :root {
@@ -115,13 +136,13 @@ button:hover {
 .content {
   position: relative;
   z-index: 2;
-  background-color: #fafafa; /* Slightly off-white background */
+  background-color: var(--background-color);
   padding: 20px;
 }
 
 /* Form styles */
 form {
-  background-color: #fff;
+  background-color: white;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -145,7 +166,7 @@ form select {
   /* width: calc(100% - 20px); */
   padding: 10px;
   /* margin-bottom: 10px; */
-  border: 1px solid #ddd;
+  border: 1px solid var(--input-border-color);
   border-radius: 5px;
   font-family: 'Raleway', sans-serif;
 }
@@ -153,7 +174,7 @@ form input[type="text"]:focus,
 form input[type="password"],
 form textarea:focus,
 form select:focus {
-  color: rgb(82, 57, 26); /* Change this to your desired text color */
+  color: var(--input-focus-color); /* Change this to your desired text color */
   /* border-color: burlywood; Optional: Change border color on focus */
   outline: none; /* Optional: Remove default outline */
 }
@@ -191,7 +212,7 @@ ul {
 }
 
 ul li {
-  background-color: #fff;
+  background-color: white;
   padding: 20px;
   /* margin-bottom: 10px; */
   border-radius: 10px;
@@ -217,7 +238,7 @@ ul li {
   width: 80%;
   min-width: '250px';
 
-  background-color: #fafafa;
+  background-color: var(--background-color);
   padding: 2rem;
   /* margin-top: 50px; */
   /* position: relative; */
@@ -234,7 +255,7 @@ ul li {
 textarea {
   width: calc(100% - 20px);
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--input-border-color);
   border-radius: 5px;
 }
 
@@ -246,7 +267,7 @@ textarea {
 
 .admin-panel li {
   position: relative; /* Allow positioning of the trash icon */
-  background-color: #fff; /* White background for user items */
+  background-color: white; /* White background for user items */
   padding: 15px; /* Add padding for better spacing */
   margin-bottom: 10px; /* Space between user items */
   border-radius: 10px; /* Rounded corners */
@@ -358,7 +379,7 @@ textarea {
   display: inline-block;
   margin-top: 10vh;
   margin-bottom: 0px;
-  color: rgb(82, 57, 26);
+  color: var(--input-focus-color);
 
   width: 0; /* Start with width 0 */
   animation: typing 2s steps(1000, end) forwards; /* Adjust duration and steps */
@@ -372,11 +393,11 @@ textarea {
 }
 
 .content-container {
-  background-color: #fafafa;
+  background-color: var(--background-color);
   padding: 2rem;
   position: relative;
   width: 55%;
-  min-width: 250px;
+  min-width: 280px;
   margin: 0 auto;
   margin-top: 80px;
   max-width: 600px;
@@ -443,14 +464,14 @@ input, button {
 }
 
 button {
-  background-color: burlywood;
+  background-color: var(--button-color);
   color: white;
   border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: darkgoldenrod;
+  background-color: var(--button-color-hover);
 }
 
 .language-toggle {
@@ -460,7 +481,7 @@ button:hover {
   width: auto !important;
   min-width: 40px;
   max-width: 60px;
-  background-color: burlywood;
+  background-color: var(--button-color);
   color: white;
   border: none;
   padding: 7px 0px;
@@ -484,7 +505,7 @@ button:hover {
   width: auto; /* Ensure the button doesn't stretch */
   height: 30px;
   min-width: 40px; /* Minimum width to fit the text */
-  background-color: burlywood;
+  background-color: var(--button-color);
   color: white;
   border: none;
   padding: 7px 12px;
@@ -638,7 +659,7 @@ button:hover {
 
 .switch-toggle input + label {
     float: left;
-    color: #fff;
+    color: white;
     height: 25px;
     font-size: 12px;
     cursor: pointer;
@@ -898,9 +919,13 @@ button:hover {
   margin-top: 30px;
   margin-bottom: 30px;
   border-spacing: 0;
-  min-width: 250px;
+  min-width: 300px;
 }
-
+@media (max-width: 400px) {
+  .event-table {
+    width: 90%; /* Adjust right position for small screens */
+  }
+}
 .event-table td {
   vertical-align: middle; /* Vertically center content in cells */
   text-align: center; 
@@ -928,12 +953,13 @@ button:hover {
   width: 6rem; /* Adjusted width for icons */
   height: auto; /* Maintain aspect ratio */
   /*max-width: 100%; /* Ensure it doesn't exceed the container's width */
-  margin-bottom: 30px;
+  margin-bottom: 6rem;
 }
 
 .time {
   font-size: 18px;
-  font-weight: bold;
+  font-family: 'Raleway';
+  font-weight: 100;
 }
 
 .event-table td + td {
@@ -1009,8 +1035,8 @@ button:hover {
 }
 
 .footer h4 {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   font-family: Hurricane;
   font-size: 30px;
   font-weight: 100;
@@ -1024,6 +1050,11 @@ button:hover {
   align-items: center;
   margin: 0 auto;
   white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .contact-container {
+    width: 100%;
+  }
 }
 
 .contact-item {
@@ -1047,13 +1078,13 @@ button:hover {
 }
 @media (max-width: 400px) {
   .contact-item {
-    font-size: 0.6rem; /* Even smaller font size for very small screens */
+    font-size: 0.8rem; /* Even smaller font size for very small screens */
     margin: 0 auto;
   }
 }
 
 .contact-item a {
-  color: #25D366; /* WhatsApp color */
+  color: var(--whatsapp-color); /* WhatsApp color */
   text-decoration: none; /* Remove underline */
 }
 
@@ -1062,12 +1093,12 @@ button:hover {
 }
 
 .whatsapp-icon {
-  color: gray; /* Change this to your desired color */
+  /* color: gray; Change this to your desired color */
   transition: color 0.3s; /* Optional: Add a transition for hover effect */
 }
 
 .whatsapp-icon:hover {
-  color: pink /* Change color on hover (optional) */
+  color: var(--whatsapp-hover-color) /* Change color on hover (optional) */
 }
 
 
@@ -1124,6 +1155,12 @@ button:hover {
 
 .quote-text {
   margin: 0 auto; /* Center the text block */
+}
+
+@media (max-width: 500px) {
+  .quote-container {
+      font-size: 0.85rem; /* Adjust right position for small screens */
+  }
 }
 
 
@@ -1195,6 +1232,6 @@ button:hover {
 }
 @media (max-width: 400px) {
   .confirm-arrival {
-    font-size: 0.6rem; /* Even smaller font size for very small screens */
+    font-size: 0.7rem; /* Even smaller font size for very small screens */
   }
 }
