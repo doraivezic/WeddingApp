@@ -87,10 +87,11 @@ const Home = () => {
         
             {showInfo && (
               <div className='info-box'>
-                  <p style={{margin:'0'}}>
-                    Please insert assigned credentials recieved on the invitation card. 
-                    <br/>In case of a problem please contact Dora.
-                  </p>
+                <p style={{margin:'0'}}>
+                  {language === 'en' ? 
+                    <>Please insert the assigned credentials received on the invitation card.<br />In case of a problem, please contact Dora.</> : 
+                    <>Molimo unesite dodijeljene informacije primljene na pozivnici.<br />U slučaju problema, molimo kontaktirajte Doru.</>}
+                </p>
               </div>
             )}
 

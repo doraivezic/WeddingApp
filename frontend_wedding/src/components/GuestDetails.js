@@ -70,7 +70,8 @@ const GuestDetails = () => {
             // Merge existing responses with fetched responses
             const updatedResponses = prevResponses.map(prev => {
               const existingResponse = data.find(r => r.name_surname === prev.name_surname);
-              return existingResponse || prev;
+              // return existingResponse || prev;
+              return existingResponse ? { ...prev, ...existingResponse } : prev;
             });
             return updatedResponses;
           });
@@ -170,7 +171,7 @@ const GuestDetails = () => {
         <div className="separator" style={{minWidth:'300px'}}></div>
       </div>
 
-      <div className="quote-container"  style={{minWidth:'250px'}}>
+      <div className="quote-container"  style={{minWidth:'300px'}}>
         <div className="quote-text">
           <p className="drop-effect">
             NAŠA LJUBAV JE GORJELA VJERNO I INTENZIVNO,<br />
