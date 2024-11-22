@@ -5,6 +5,8 @@ import {LanguageContext} from "../contexts/LanguageContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'; // Import WhatsApp icon
 
+const apiUrl = process.env.REACT_APP_API_URL || '';
+
 const GuestDetails = () => {
   const { userUsername } = useContext(AuthContext);
   const { language } = useContext(LanguageContext);
@@ -13,7 +15,39 @@ const GuestDetails = () => {
   const [comment, setComment] = useState('');
   const [showCommentSection, setShowCommentSection] = useState(false);
   const [userMessage, setUserMessage] = useState('');
-  const apiUrl = process.env.REACT_APP_API_URL || '';
+
+  const UserMessage = ({ message }) => {
+    const [displayedText, setDisplayedText] = useState('');
+
+    useEffect(() => {
+      if (!message) {
+        setDisplayedText(''); // Reset if message is undefined or null
+        return;
+      }
+
+      let index = 0;
+      const characters = message.split(''); // Split the message into characters
+      const interval = setInterval(() => {
+        if (index < characters.length-1) {
+          setDisplayedText((prev) => prev + characters[index]);
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 50); // Adjust the speed of typing here
+
+      return () => clearInterval(interval);
+    }, [message]);
+
+    return (
+      <p className="user-message">
+        {displayedText.split('\n').map((line, i) => (
+          <span key={i}>{line}<br />
+          </span>
+        ))}
+      </p>
+    );
+  };
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -161,10 +195,13 @@ const GuestDetails = () => {
             <h1>Dora & Marin</h1>
             <p style={{fontSize: '1.1rem', fontFamily: 'Raleway'}}>17.05.2025.</p>
             <div style={{width: 'fit-content', margin:'0 auto'}}>
-              {userMessage && 
+              {/* {userMessage && 
                 <p className='user-message'>
                   {userMessage}
                 </p>
+              } */}
+              {userMessage && 
+                <UserMessage message={userMessage} />
               }
             </div>
           </div>
@@ -187,107 +224,107 @@ const GuestDetails = () => {
       </div>
 
 
-      <table class="event-table">
+      <table className="event-table">
 
         <tr>
-          <td class="event-content">
-            <h3 style={{fontSize: '1.3rem', fontFamily: 'WindSong',  padding: '10px'}}>{language === 'en' ? 'Gathering' : 'Okupljanje'}</h3>
-            <div class="time-line">
-              <div class="time">11:00</div>
-              <div class="line"></div>
+          <td className="event-content">
+            <h3 className='table-event-name'>{language === 'en' ? 'Gathering' : 'Okupljanje'}</h3>
+            <div className="time-line left-time-line">
+              <div className="time">11:00</div>
+              <div className="line"></div>
             </div>
-            <p style={{fontWeight: '500'}}>
+            <p className='table-location-exact'>
               Crkva Pohoda Bl. Djevice Marije
               <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Bale</p>
             </p>
             <a href="https://www.google.com/maps/search/?api=1&query=Crkva+Pohoda+Bl.+Djevice+Marije,+Bale" target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
-              <button style={{width: '7rem'}}>Vidi kartu</button>
+              <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
             </a>
           </td>
-          <td class="icon">
-            <img src='/cocktail-icon.png' alt="Cocktail" />
+          <td className="icon" style={{ paddingLeft: '10px' }}>
+            <img src='/cocktail-icon.svg' alt="Cocktail" />
           </td>
         </tr>
 
         <tr>
-          <td class="icon">
-            <img src='/ring-icon.png' alt="Rings" />
+          <td className="icon" style={{ paddingRight: '10px' }}>
+            <img src='/ring-icon.svg' alt="Rings" style={{transform: 'rotate(-45deg)'}} />
           </td>
-          <td class="event-content">
-            <h3 style={{fontSize: '1.3rem', fontFamily: 'WindSong',  padding: '10px'}}>{language === 'en' ? 'Church Wedding' : 'Vjenčanje'}</h3>
-            <div class="time-line">
-              <div class="line"></div>
-              <div class="time">13:00</div>
+          <td className="event-content">
+            <h3 className='table-event-name'>{language === 'en' ? 'Church Wedding' : 'Vjenčanje'}</h3>
+            <div className="time-line right-time-line">
+              <div className="line"></div>
+              <div className="time">13:00</div>
             </div>
-            <p style={{fontWeight: '500'}}>
+            <p className='table-location-exact'>
               Crkva Pohoda Bl. Djevice Marije
               <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Bale</p>
             </p>
             <a href="https://www.google.com/maps/search/?api=1&query=Crkva+Pohoda+Bl.+Djevice+Marije,+Bale" target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
-              <button style={{width: '7rem'}}>Vidi kartu</button>
+              <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
             </a>
           </td>
         </tr>
 
         <tr>
-          <td class="event-content">
-            <h3 style={{fontSize: '1.3rem', fontFamily: 'WindSong', padding: '10px'}}>{language === 'en' ? 'Dinner' : 'Svečana večera'}</h3>
-            <div class="time-line">
-              <div class="time">15:00</div>
-              <div class="line"></div>
+          <td className="event-content">
+            <h3 className='table-event-name'>{language === 'en' ? 'Dinner' : 'Svečana večera'}</h3>
+            <div className="time-line left-time-line">
+              <div className="time">15:00</div>
+              <div className="line"></div>
             </div>
-            <p style={{fontWeight: '500'}}>
+            <p className='table-location-exact'>
               Meneghetti Wine Hotel & Winary
               <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Bale</p>
             </p>
             <a href="https://www.google.com/maps/search/?api=1&query=Meneghetti+Wine+Hotel,+Bale" target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
-              <button style={{width: '7rem'}}>Vidi kartu</button>
+              <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
             </a>
           </td>
-          <td class="icon">
-            <img src='/restaurant-icon.png' alt="Dinner" />
+          <td className="icon" style={{ paddingLeft: '10px' }}>
+            <img src='/restaurant-icon.svg' alt="Dinner" />
           </td>
         </tr>
 
       </table>
 
 {/* 
-      <div class="timeline">
+      <div className="timeline">
 
-        <div class="event left">
-          <div class="time">15:30</div>
-          <div class="icon"><img src='/cocktail-icon.png' alt="Cocktail" /></div>
-          <div class="event-content">
+        <div className="event left">
+          <div className="time">15:30</div>
+          <div className="icon"><img src='/cocktail-icon.png' alt="Cocktail" /></div>
+          <div className="event-content">
             <h3 style={{fontSize: '2em', transform: 'translate(-50%, -50%)', whiteSpace: 'nowrap'}}>Okupljanje</h3>
             <p>Villa Lipa, Jesenice</p>
             <button>Vidi kartu</button>
           </div>
         </div>
 
-        <div class="event left">
-          <div class="event-content">
+        <div className="event left">
+          <div className="event-content">
             <h3 style={{fontSize: '2em', whiteSpace: 'nowrap'}}>Okupljanje</h3>
             <p>Villa Lipa, Jesenice</p>
             <button>Vidi kartu</button>
           </div>
-          <div class="icon"><img src='/cocktail-icon.png' alt="Cocktail" /></div>
-          <div class="time">15:30</div>
+          <div className="icon"><img src='/cocktail-icon.png' alt="Cocktail" /></div>
+          <div className="time">15:30</div>
         </div>
         
-        <div class="event right">
-          <div class="time">17:00</div>
-          <div class="icon"><img src='/ring-icon.png' alt="Rings" /></div>
-          <div class="event-content">
+        <div className="event right">
+          <div className="time">17:00</div>
+          <div className="icon"><img src='/ring-icon.png' alt="Rings" /></div>
+          <div className="event-content">
             <h3 style={{fontSize: '2em', transform: 'translate(-50%, -50%)', whiteSpace: 'nowrap'}}>Obred vjenčanja</h3>
             <p>Crkva sv. Roka, Jesenice</p>
             <button>Vidi kartu</button>
           </div>
         </div>
         
-        <div class="event left">
-          <div class="time">18:30</div>
-          <div class="icon"><img src='/restaurant-icon.png' alt="Dinner" /></div>
-          <div class="event-content">
+        <div className="event left">
+          <div className="time">18:30</div>
+          <div className="icon"><img src='/restaurant-icon.png' alt="Dinner" /></div>
+          <div className="event-content">
             <h3 style={{fontSize: '2em', transform: 'translate(-50%, -50%)', whiteSpace: 'nowrap'}}>Svečana večera</h3>
             <p>Konoba Bajso, Jesenice</p>
             <button>Vidi kartu</button>
@@ -385,7 +422,7 @@ const GuestDetails = () => {
                 </div> */}
 
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                <div class="tri-state-toggle">
+                <div className="tri-state-toggle">
 
                   <button
                     type="button"

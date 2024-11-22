@@ -6,6 +6,8 @@ import { LanguageContext } from '../contexts/LanguageContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faInfoCircle } from '@fortawesome/free-solid-svg-icons'; // Import eye icons
 
+const apiUrl = process.env.REACT_APP_API_URL || '';
+
 const Home = () => {
   const { login } = useContext(AuthContext);
   const { language, toggleLanguage } = useContext(LanguageContext);
@@ -15,7 +17,6 @@ const Home = () => {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false); 
   const [showInfo, setShowInfo] = useState(false);
-  const apiUrl = process.env.REACT_APP_API_URL || '';
 
   const togglePasswordVisibility = () => {
       setShowPassword(!showPassword); // Toggle the visibility state
@@ -64,7 +65,7 @@ const Home = () => {
         </button>
 
         <div className="hero-container">
-          <img src="/image.png" alt="Hero image" className="hero-image" />
+          <img src="/image.png" alt="Dora-Marin" className="hero-image" />
           <div className="hero-text">
             <h1 className='typing-effect'>Dora & Marin</h1>
             <p style={{fontSize: '1.3rem', fontFamily: 'Raleway'}}>17.05.2025.</p>
@@ -82,8 +83,8 @@ const Home = () => {
           <div className="separator"></div>
         </div> */}
 
-        <div class="content-container" style={{ position: 'relative' }}>
-          <form class="login-form" onSubmit={handleLogin} style={{ position: 'relative'}}>
+        <div className="content-container" style={{ position: 'relative' }}>
+          <form className="login-form" onSubmit={handleLogin} style={{ position: 'relative'}}>
         
             {showInfo && (
               <div className='info-box'>
@@ -109,7 +110,7 @@ const Home = () => {
                     // width: '16px',
                 }}
             >
-                <FontAwesomeIcon icon={faInfoCircle} style={{ color: 'burlywood', fontSize: '19px' }} />
+                <FontAwesomeIcon icon={faInfoCircle} className='info-icon' style={{fontSize: '19px'}} />
             </span>
 
             <div>
