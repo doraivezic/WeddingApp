@@ -11,19 +11,19 @@
 
 
 :root {
-  --background-color: #fafafa; /* Slightly off-white background */
-  --text-color: #333;
+  --background-color: #fffeff; /* #fafafa */
+  --text-color: #282828; /*#333*/
   --button-background-color: #d1a3a4; /* Soft pink color */
-  --button-hover-color: #c18d8f;
+  --button-hover-color: #c18d8f; /*#c18d8f*/
   /* --separator-background: linear-gradient(to bottom, transparent, #fafafa); */
-  --input-border-color: #ddd;
-  --input-focus-color: rgb(82, 57, 26); /* Change this to your desired text color */
-  --whatsapp-color: #25D366; /* WhatsApp color */
-  --whatsapp-hover-color: rgb(57, 99, 53); /* Change color on hover (optional) */
-  /* --footer-background: linear-gradient(to bottom, rgba(210, 164, 66, 0.8), rgba(210, 164, 66, 0.5)); */
+  --input-border-color: #ddd; /*#ddd*/
+  --input-focus-color: rgb(82, 57, 26); /* rgb(82, 57, 26)*/
+  --whatsapp-color: rgb(57, 99, 53); /* WhatsApp color #25D366 */
+  --whatsapp-hover-color: rgb(25, 54, 22); /* Change color on hover (optional) */
+  --footer-background: linear-gradient(to bottom, rgba(209, 235, 185, 0.336), rgba(150, 212, 147, 0.616)); /*linear-gradient(to bottom, rgba(210, 164, 66, 0.8), rgba(210, 164, 66, 0.5))*/
   /* Add more color variables as needed */
-  --button-color: burlywood;
-  --button-color-hover: darkgoldenrod;
+  --button-color: rgb(119, 115, 78); /*burlywood*/
+  --button-color-hover: rgb(143, 127, 47); /*darkgoldenrod*/
 }
 
 
@@ -108,7 +108,7 @@ button:hover {
 
 .separator {
   position: absolute;
-  bottom: 0;
+  bottom: -1px;
   left: 0;
   right: 0;
   /* height: 100px; */
@@ -121,7 +121,7 @@ button:hover {
   /*background-repeat: no-repeat;
   /*background-size: cover; *
   margin-top: -20vh; /* Overlap the separator slightly with the image */
-  background: linear-gradient(to bottom, transparent, #fafafa);
+  background: linear-gradient(to bottom, transparent, var(--background-color));
 }
 
 /* .separator {
@@ -374,22 +374,30 @@ textarea {
 .user-message {
   font-size: 0.7em;
   font-family: 'Ephesis';
-  overflow: hidden;
-  white-space: nowrap;
+  overflow: visible;
+  /* white-space: nowrap; */
   display: inline-block;
   margin-top: 10vh;
   margin-bottom: 0px;
   color: var(--input-focus-color);
 
-  width: 0; /* Start with width 0 */
-  animation: typing 2s steps(1000, end) forwards; /* Adjust duration and steps */
-  animation-delay: 0.8s;
+  width: 0; 
+  /* max-width: 80%;  */
+  /* width: 100%; */
+
+  animation: typing 0.05s steps(1000, end) forwards;
+  /* animation-delay: 0.8s; */
 
   z-index: 2;
   left: 0%;
   display: flex;
   padding: auto;
   position: relative;
+}
+@media (max-width: 300px) {
+  .user-message {
+    width: 100%; /* Ensure 100% width on very small screens */
+  }
 }
 
 .content-container {
@@ -475,7 +483,7 @@ button:hover {
 }
 
 .language-toggle {
-  position: fixed;
+  position: absolute;
   top: 10px;
   right: 20px;
   width: auto !important;
@@ -499,7 +507,7 @@ button:hover {
 
 
 .logout-button {
-  position: fixed;
+  position: absolute; /*fixed ako zelim da stalno budu na ekranu*/
   top: 10px;
   right: 70px;
   width: auto; /* Ensure the button doesn't stretch */
@@ -741,12 +749,12 @@ button:hover {
 }
 
 .tri-state-toggle-button.active {
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
                           90deg,
                           rgb(179, 148, 107) 0%,
                           rgb(188, 156, 115) 35%,
                           burlywood 100%
-                        );
+                        ); */
   border: 0px solid rgba(207,207,207,0.6);
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
   color: white;
@@ -913,7 +921,7 @@ button:hover {
   /* width: 100%; */
   margin: 0 auto; /* Center the table */
   position: relative;
-  width: 65%;
+  width: 55%;
   /*max-width: 800px; /* Set a maximum width for the timeline */
   /*padding: 200px 0; /* Adjust padding to avoid extending the screen */
   margin-top: 30px;
@@ -921,9 +929,14 @@ button:hover {
   border-spacing: 0;
   min-width: 300px;
 }
-@media (max-width: 400px) {
+@media (max-width: 1100px) {
   .event-table {
-    width: 90%; /* Adjust right position for small screens */
+    width: 75%; /* Adjust right position for small screens */
+  }
+}
+@media (max-width: 900px) {
+  .event-table {
+    width: 85%; /* Adjust right position for small screens */
   }
 }
 .event-table td {
@@ -932,6 +945,69 @@ button:hover {
   /* border: none; */
   /* padding: 10px; */
 }
+
+.time-line {
+  display: flex;
+  align-items: center; /* Center the time and line vertically */
+}
+.left-time-line {
+  width: 110%;
+  margin-left: -10%;
+}
+.right-time-line {
+  width: 110%;
+  margin-right: -10%;
+}
+.time {
+  margin-right: 10px; /* Space between time and line */
+  margin-left: 10px; /* Space between time and line */
+  font-size: 1rem;
+  font-family: 'Raleway';
+  font-weight: 100;
+}
+.line {
+  flex-grow: 1; /* Allow the line to take remaining space */
+  height: 1px; /* Height of the line */
+  /*background-color: black; /* Color of the line */
+  border-top: 2px dotted black;
+}
+.table-event-name {
+  font-size: 1.7rem;
+  font-family: 'WindSong', sans-serif;
+  /* font-family: 'Ephesis'; */
+  font-weight: 100;
+  padding: 10px;
+}
+.table-location-exact {
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+@media (max-width: 768px) { /* Adjust the max-width as needed */
+  .table-event-name{
+    font-size: 1.5rem;
+  }
+  .table-location-exact{
+    font-size: 0.7rem;
+  }
+  .time{
+    font-size: 0.95rem;
+    margin-right: 5px; /* Space between time and line */
+    margin-left: 5px;
+  }
+}
+@media (max-width: 380px) { /* Adjust the max-width as needed */
+  .right-time-line{
+    width: 100%;
+    margin: 0;
+  }
+  .left-time-line{
+    width: 100%;
+    margin: 0;
+  }
+}
+
 
 .event-content {
   /* text-align: left;
@@ -956,12 +1032,6 @@ button:hover {
   margin-bottom: 6rem;
 }
 
-.time {
-  font-size: 18px;
-  font-family: 'Raleway';
-  font-weight: 100;
-}
-
 .event-table td + td {
   border-left: 2px solid rgb(45, 38, 20); /* Add a border between the columns */
   /*border-collapse: collapse; /* Ensures borders are collapsed into a single line */
@@ -972,28 +1042,6 @@ button:hover {
   text-align: center; 
   padding: 0; /* Add padding for spacing */
   height: 20rem; /* Set a specific height for the cells */
-}
-
-
-
-.time-line {
-  display: flex;
-  align-items: center; /* Center the time and line vertically */
-  width: 100%; /* Full width of the cell */
-}
-
-.time {
-  font-size: 18px;
-  font-weight: bold;
-  margin-right: 10px; /* Space between time and line */
-  margin-left: 10px; /* Space between time and line */
-}
-
-.line {
-  flex-grow: 1; /* Allow the line to take remaining space */
-  height: 1px; /* Height of the line */
-  /*background-color: black; /* Color of the line */
-  border-top: 2px dotted black;
 }
 
 
@@ -1014,7 +1062,7 @@ button:hover {
   bottom: 0; /* Stick to the bottom */
   /* background: linear-gradient(to bottom, transparent, #d2a442); */
   overflow: 'hidden';
-  background: linear-gradient(to bottom, rgba(210, 164, 66, 0.8), rgba(210, 164, 66, 0.5));
+  background: var(--footer-background);
   /* width: 100%; */
   min-width: 250px;
 }
@@ -1208,6 +1256,12 @@ button:hover {
       right: auto; /* Reset right to auto to avoid conflicts */
   }
 }
+.info-icon {
+  color: var(--button-color);
+}
+.info-icon:hover {
+  color: var(--button-color-hover);
+}
 
 .error {
   color: red; /* Set text color to red */
@@ -1230,7 +1284,7 @@ button:hover {
     font-size: 0.8rem; /* Smaller font size for smaller screens */
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 300px) {
   .confirm-arrival {
     font-size: 0.7rem; /* Even smaller font size for very small screens */
   }
