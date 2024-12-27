@@ -1289,3 +1289,157 @@ button:hover {
     font-size: 0.7rem; /* Even smaller font size for very small screens */
   }
 }
+
+
+
+.menu-container {
+  display: flex;
+  justify-content: space-between; 
+  margin: 0 auto;
+  gap: 7px;
+  width: 70%;
+  flex-wrap: wrap;
+  min-width: 280px;
+  box-sizing: border-box;
+}
+
+.menu-item {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ffffff;
+  box-shadow: 0 4px 15px rgba(138, 126, 87, 0.113);
+  background-color: #ffffff;
+  min-width: 0;
+  max-width: calc(50% - 20px);
+  box-sizing: border-box;
+}
+
+.menu-item h4 {
+  font-family: 'WindSong', cursive;
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 30px;
+  width: 100%;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+.menu-item p {
+  margin: 3px 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+/* Add responsive breakpoints */
+@media (max-width: 768px) {
+  .menu-container {
+    width: 90%;
+  }
+  
+  .menu-item {
+    max-width: 100%; /* Full width on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-container {
+    width: 95%;
+  }
+}
+
+
+
+.dress-code-container {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(223, 31, 165, 0.175);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255,255,255,0.3);
+  position: relative;
+  overflow: hidden;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.dress-code-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    #ff9a9e 0%,
+    #fad0c4 25%,
+    #fbc2eb 50%,
+    #a6c1ee 75%,
+    #c2e9fb 100%
+  );
+}
+
+.dress-code-emoji-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.dress-code-emoji-container span {
+  font-size: 2.5rem;
+  transition: transform 0.3s ease;
+}
+
+.dress-code-emoji-container span:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.dress-code-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: 'Raleway', sans-serif;
+  color: #4a4a4a;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+  .dress-code-container {
+    margin: 20px 15px;
+    padding: 20px 15px;
+  }
+  
+  .dress-code-emoji-container span {
+    font-size: 2rem;
+  }
+  
+  .dress-code-text {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}

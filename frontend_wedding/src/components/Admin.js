@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { width } from '@fortawesome/free-solid-svg-icons/fa0';
+// import { width } from '@fortawesome/free-solid-svg-icons/fa0';
+
+const apiUrl = process.env.REACT_APP_API_URL || '';
 
 const Admin = () => {
   const [users, setUsers] = useState([]);
@@ -12,7 +14,6 @@ const Admin = () => {
   const [newNameSurname, setNewNameSurname] = useState('');
   const [editingMessage, setEditingMessage] = useState({});
   const [newUser, setNewUser] = useState({ username: '', password: '' });
-  const apiUrl = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
     const fetchUsers = async () => {

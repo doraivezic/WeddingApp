@@ -3,9 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Flask, send_from_directory
+# from asgiref.wsgi import WsgiToAsgi
 import os
 
-app = Flask(__name__)
+# app = Flask(__name__)
+app = Flask(__name__, static_folder="../frontend_wedding/build")
 CORS(app)  # Enable CORS
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')
@@ -13,6 +16,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)  # Initialize Flask-Migrate
+
+@app.route('/')
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
 
 class User(db.Model):
     username = db.Column(db.String(80), primary_key=True)
@@ -235,4 +242,5 @@ def get_user_comments(user_username):
     return jsonify(comment_list), 200
 
 if __name__ == '__main__':
+    # app = WsgiToAsgi(app)
     app.run(debug=True)
