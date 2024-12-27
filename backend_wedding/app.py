@@ -11,10 +11,13 @@ import os
 app = Flask(__name__, static_folder="../frontend_wedding/build")
 CORS(app)  # Enable CORS
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://weddingdatabase_6t11_user:i3g08Y2kxei2BbxxyhenH6oFQHQXFyjO@dpg-ctnj38lumphs73c79nbg-a.frankfurt-postgres.render.com/weddingdatabase_6t11'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
+from flask_migrate import Migrate
 migrate = Migrate(app, db)  # Initialize Flask-Migrate
 
 @app.route('/')

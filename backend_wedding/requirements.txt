@@ -116,3 +116,4 @@ uvicorn==0.34.0
 websocket-client==1.8.0
 Werkzeug==2.3.8
 wsproto==1.2.0
+psycopg2==2.9.10
