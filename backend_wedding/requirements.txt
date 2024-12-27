@@ -122,7 +122,6 @@ traitlets==5.10.1
 typer==0.6.1
 types-requests==2.31.0.6
 types-urllib3==1.26.25.14
-typing_extensions==4.11.0
 tzdata==2024.1
 uritemplate==4.1.1
 urllib3==1.26.18
