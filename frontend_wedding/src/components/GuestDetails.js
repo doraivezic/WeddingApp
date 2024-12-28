@@ -70,10 +70,16 @@ const GuestDetails = () => {
   useEffect(() => {
     const fetchNameSurnamesAndInitializeResponses = async () => {
       try {
+        // First fetch name surnames
         const nameSurnameResponse = await fetch(`${apiUrl}/api/name_surnames/${userUsername}`);
         const nameSurnameData = await nameSurnameResponse.json();
+        
+        // Then fetch form responses
+        const formResponse = await fetch(`${apiUrl}/api/form_responses/${userUsername}`);
+        const formData = await formResponse.json();
+
         if (nameSurnameResponse.ok) {
-          // setNameSurnames(nameSurnameData);
+          // Create initial responses from name surnames
           const initialResponses = nameSurnameData.map(ns => ({
             name_surname: ns.name_surname,
             user_username: userUsername,
@@ -82,12 +88,23 @@ const GuestDetails = () => {
             allergies: '',
             comment: ''
           }));
-          setResponses(initialResponses);
-        } else {
-          console.error('Error fetching name surnames:', nameSurnameData.error);
+
+          // If form responses exist, merge them with initial responses
+          if (formResponse.ok) {
+            const updatedResponses = initialResponses.map(initial => {
+              const existingResponse = formData.find(r => r.name_surname === initial.name_surname);
+              return existingResponse ? { ...initial, ...existingResponse } : initial;
+            });
+            setResponses(updatedResponses);
+            
+            const hasAccepted = updatedResponses.some(response => response.accepted);
+            setShowCommentSection(hasAccepted);
+          } else {
+            setResponses(initialResponses);
+          }
         }
       } catch (error) {
-        console.error('Error fetching name surnames:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -211,14 +228,12 @@ const GuestDetails = () => {
         <div className="quote-container" style={{minWidth: '300px'}}>
           <div className="quote-text">
             <p className="drop-effect">
-              NAŠA LJUBAV JE GORJELA VJERNO I INTENZIVNO,<br/>
-              I SADA SMO SE ODLUČILI STATI PRED OLTAR.<br/>
-              KAKO VEĆ ZNATE, NEĆEMO DULJITI -<br/>
-              DONIJELI SMO ODLUKU DA ZAKORAČIMO U BRAK.<br/>
-              KAŽU DA JE BRAK ČIN PREDAVANJA SRCA,<br/>
-              I UPRAVO TO PLANIRAMO UČINITI.<br/>
-              ZATO NEKA SE SLAVLJE NASTAVI DO ZORE.<br/><br/>
-              VIDIMO SE NA SVADBENOM SLAVLJU!
+              A RUTA JOJ ODGOVORI: 'NEMOJ ME TJERATI DA TE OSTAVIM I DA ODEM OD TEBE:<br/>
+              JER KAMO TI IDEŠ, IDEM I JA I GDJE SE TI NASTANIŠ, NASTANIT ĆU SE I JA;<br/>
+              TVOJ NAROD MOJ JE NAROD I TVOJ BOG MOJ JE BOG.<br/>
+              GDJE TI UMREŠ, UMRIJET ĆU I JA; GDJE TEBE POKOPAJU, POKOPAT ĆE I MENE.<br/>
+              NEKA MI JAHVE UZVRATI SVAKIM ZLOM I NEVOLJOM AKO ME ŠTO DRUGO,<br/>
+              OSIM SMRTI, RASTAVI OD TEBE.' (RUTA 1,16-17)
             </p>
           </div>
         </div>
@@ -393,9 +408,9 @@ const GuestDetails = () => {
           <h3>{language === 'en' ? 'Accept invitation' : 'Potvrdite dolazak'}</h3>
           <p className='confirm-arrival'>
             {language === 'en' ? (
-                <>PLEASE CONFIRM YOUR ARRIVAL UNTIL <b>25.12.2024.</b></>
+                <>PLEASE CONFIRM YOUR ARRIVAL UNTIL <b>31.01.2024.</b></>
             ) : (
-                <>MOLIMO POTVRDITE SVOJ DOLAZAK DO <b>25.12.2024.</b></>
+                <>MOLIMO POTVRDITE SVOJ DOLAZAK DO <b>31.01.2024.</b></>
             )}
           </p>
 

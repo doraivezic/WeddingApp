@@ -11,19 +11,19 @@
 
 
 :root {
-  --background-color: #fffeff; /* #fafafa */
+  --background-color: #f9f7ff; /* #fafafa */
   --text-color: #282828; /*#333*/
   --button-background-color: #d1a3a4; /* Soft pink color */
   --button-hover-color: #c18d8f; /*#c18d8f*/
   /* --separator-background: linear-gradient(to bottom, transparent, #fafafa); */
   --input-border-color: #ddd; /*#ddd*/
   --input-focus-color: rgb(82, 57, 26); /* rgb(82, 57, 26)*/
-  --whatsapp-color: rgb(57, 99, 53); /* WhatsApp color #25D366 */
-  --whatsapp-hover-color: rgb(25, 54, 22); /* Change color on hover (optional) */
-  --footer-background: linear-gradient(to bottom, rgba(209, 235, 185, 0.336), rgba(150, 212, 147, 0.616)); /*linear-gradient(to bottom, rgba(210, 164, 66, 0.8), rgba(210, 164, 66, 0.5))*/
+  --whatsapp-color: rgb(51, 178, 49); /* WhatsApp color #25D366 */
+  --whatsapp-hover-color: rgb(31, 217, 28); /* Change color on hover (optional) */
+  --footer-background: linear-gradient(to bottom, rgba(23, 12, 13, 0), rgba(206, 147, 212, 0.498)); /*linear-gradient(to bottom, rgba(210, 164, 66, 0.8), rgba(210, 164, 66, 0.5))*/
   /* Add more color variables as needed */
-  --button-color: rgb(119, 115, 78); /*burlywood*/
-  --button-color-hover: rgb(143, 127, 47); /*darkgoldenrod*/
+  --button-color: rgb(119, 75, 38); /*burlywood*/
+  --button-color-hover: rgb(198, 45, 228); /*darkgoldenrod*/
 }
 
 
@@ -693,7 +693,7 @@ button:hover {
 
 
 .tri-state-toggle {
-    background: rgba(190, 174, 153, 0.894);
+    background: rgba(233, 225, 218, 0.894);
     box-shadow: inset 0 2px 8px 0 rgba(165,170,174,0.25);
     border-radius: 24px;
     overflow: hidden;
@@ -715,7 +715,7 @@ button:hover {
     background-color: transparent;
     border: 0px solid transparent;
     margin: 2px;
-    color: white;
+    color: rgb(19, 1, 1);
     cursor: pointer;
     padding:1px;
     margin-left: 2px;
@@ -748,6 +748,10 @@ button:hover {
   }
 }
 
+.tri-state-toggle-button:hover {
+  background-color: rgba(51, 44, 44, 0.064);
+}
+
 .tri-state-toggle-button.active {
   /* background-image: linear-gradient(
                           90deg,
@@ -755,7 +759,7 @@ button:hover {
                           rgb(188, 156, 115) 35%,
                           burlywood 100%
                         ); */
-  border: 0px solid rgba(207,207,207,0.6);
+  border: 0px solid rgba(207, 207, 207, 0.655);
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
   color: white;
   font-weight: 500;
@@ -767,27 +771,31 @@ button:hover {
 }
 
 .tri-state-toggle-button.active.tri-state-toggle-button-declined {
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
                           90deg,
-                          rgb(113, 59, 58) 0%,
-                          rgb(149, 38, 32) 35%,
-                          rgba(200, 96, 94, 0.723) 100%
-                        );
+                          rgb(196, 41, 39) 0%,
+                          rgb(229, 48, 38) 35%,
+                          rgba(242, 42, 38, 0.723) 100%
+                        ); */
+  background-color: rgb(232, 41, 12);
+  box-shadow: 0 2px 4px rgb(90, 90, 90);
 }
 .tri-state-toggle-button.active.tri-state-toggle-button-accepted {
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
                           90deg,
-                          rgb(64, 94, 51) 0%,
-                          rgb(51, 110, 62) 35%,
-                          rgba(80, 163, 87, 0.586) 100%
-                        );
+                          rgb(85, 200, 36) 0%,
+                          rgb(50, 195, 45) 35%,
+                          rgba(38, 237, 44, 0.586) 100%
+                        ); */
+  background-color: rgb(75, 169, 34);
+  box-shadow: 0 2px 4px rgb(90, 90, 90);
 }
 .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
   background-image: linear-gradient(
                           90deg,
-                          rgb(121, 121, 121) 0%,
-                          rgb(161, 161, 161) 35%,
-                          rgb(207, 207, 207) 100%
+                          rgb(201, 179, 179) 0%,
+                          rgb(187, 187, 187) 35%,
+                          rgb(219, 219, 219) 100%
                         );
 }
 
@@ -1297,7 +1305,7 @@ button:hover {
   justify-content: space-between; 
   margin: 0 auto;
   gap: 7px;
-  width: 70%;
+  width: 100%;
   flex-wrap: wrap;
   min-width: 280px;
   box-sizing: border-box;
@@ -1316,7 +1324,7 @@ button:hover {
   box-shadow: 0 4px 15px rgba(138, 126, 87, 0.113);
   background-color: #ffffff;
   min-width: 0;
-  max-width: calc(50% - 20px);
+  max-width: calc(49% - 20px);
   box-sizing: border-box;
 }
 
@@ -1354,6 +1362,14 @@ button:hover {
   .menu-container {
     width: 95%;
   }
+}
+
+.fish-menu {
+  box-shadow: 0 4px 15px rgba(28, 118, 214, 0.175);
+}
+
+.meat-menu {
+  box-shadow: 0 4px 15px rgba(223, 31, 31, 0.175);
 }
 
 
