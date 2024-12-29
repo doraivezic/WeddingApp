@@ -11,19 +11,19 @@
 
 
 :root {
-  --background-color: #f9f7ff; /* #fafafa */
+  --background-color: #fdfbf8; /* #fafafa */
   --text-color: #282828; /*#333*/
-  --button-background-color: #d1a3a4; /* Soft pink color */
+  --button-background-color: #ff2adf; /* Soft pink color */
   --button-hover-color: #c18d8f; /*#c18d8f*/
   /* --separator-background: linear-gradient(to bottom, transparent, #fafafa); */
   --input-border-color: #ddd; /*#ddd*/
   --input-focus-color: rgb(82, 57, 26); /* rgb(82, 57, 26)*/
   --whatsapp-color: rgb(51, 178, 49); /* WhatsApp color #25D366 */
   --whatsapp-hover-color: rgb(31, 217, 28); /* Change color on hover (optional) */
-  --footer-background: linear-gradient(to bottom, rgba(23, 12, 13, 0), rgba(206, 147, 212, 0.498)); /*linear-gradient(to bottom, rgba(210, 164, 66, 0.8), rgba(210, 164, 66, 0.5))*/
+  --footer-background: linear-gradient(to bottom, rgba(23, 12, 13, 0), #cae3ec); /*linear-gradient(to bottom, rgba(210, 164, 66, 0.8), rgba(210, 164, 66, 0.5))*/
   /* Add more color variables as needed */
-  --button-color: rgb(119, 75, 38); /*burlywood*/
-  --button-color-hover: rgb(198, 45, 228); /*darkgoldenrod*/
+  --button-color: #ADD8E6; /*burlywood*/
+  --button-color-hover: rgb(99, 177, 211); /*darkgoldenrod*/
 }
 
 
@@ -57,6 +57,7 @@ button {
 
 button:hover {
   background-color: var(--button-hover-color);
+  color: #ffffffdd;
 }
 
 :root {
@@ -121,7 +122,13 @@ button:hover {
   /*background-repeat: no-repeat;
   /*background-size: cover; *
   margin-top: -20vh; /* Overlap the separator slightly with the image */
-  background: linear-gradient(to bottom, transparent, var(--background-color));
+  /* background: linear-gradient(to bottom, transparent, var(--background-color)); */
+    background: linear-gradient(to bottom, 
+    transparent 0%,
+    transparent 50%,
+    var(--background-color) 75%,
+    var(--background-color) 100%
+);
 }
 
 /* .separator {
@@ -466,20 +473,38 @@ input, button {
   width: 100%;
   margin-bottom: 1rem;
   padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  /* border: 1px solid #ccc; */
+  border-radius: 30px;
   box-sizing: border-box;
+
 }
 
 button {
   background-color: var(--button-color);
-  color: white;
-  border: none;
+  color: rgb(45, 70, 70);
+  /* border: 1px solid black; */
   cursor: pointer;
+  padding: 0.4rem 0.7rem;
 }
+
+.event-content button {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.77rem;
+}
+
 
 button:hover {
   background-color: var(--button-color-hover);
+}
+
+.event-content button:hover {
+  background-color: rgb(65, 65, 65);
+  color: white;
+  border: 1px solid rgb(65, 65, 65);
 }
 
 .language-toggle {
@@ -693,7 +718,7 @@ button:hover {
 
 
 .tri-state-toggle {
-    background: rgba(233, 225, 218, 0.894);
+    background: transparent;/* rgba(242, 235, 229, 0.894) */
     box-shadow: inset 0 2px 8px 0 rgba(165,170,174,0.25);
     border-radius: 24px;
     overflow: hidden;
@@ -715,7 +740,7 @@ button:hover {
     background-color: transparent;
     border: 0px solid transparent;
     margin: 2px;
-    color: rgb(19, 1, 1);
+    color: rgb(113, 113, 113);
     cursor: pointer;
     padding:1px;
     margin-left: 2px;
@@ -749,7 +774,7 @@ button:hover {
 }
 
 .tri-state-toggle-button:hover {
-  background-color: rgba(51, 44, 44, 0.064);
+  background-color: rgba(36, 31, 31, 0.119);
 }
 
 .tri-state-toggle-button.active {
@@ -760,7 +785,8 @@ button:hover {
                           burlywood 100%
                         ); */
   border: 0px solid rgba(207, 207, 207, 0.655);
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+  /* box-shadow: 0 8px 10px 0 rgba(164, 164, 164, 0.1); */
+  box-shadow: 0 1px 0 0 rgba(90, 90, 90, 0.331);
   color: white;
   font-weight: 500;
   transition: all .5s ease-in;
@@ -777,8 +803,9 @@ button:hover {
                           rgb(229, 48, 38) 35%,
                           rgba(242, 42, 38, 0.723) 100%
                         ); */
-  background-color: rgb(232, 41, 12);
-  box-shadow: 0 2px 4px rgb(90, 90, 90);
+  /* background-color: rgb(174, 53, 34); */
+  color: rgb(174, 53, 34);
+  font-weight: bold;
 }
 .tri-state-toggle-button.active.tri-state-toggle-button-accepted {
   /* background-image: linear-gradient(
@@ -787,16 +814,19 @@ button:hover {
                           rgb(50, 195, 45) 35%,
                           rgba(38, 237, 44, 0.586) 100%
                         ); */
-  background-color: rgb(75, 169, 34);
-  box-shadow: 0 2px 4px rgb(90, 90, 90);
+  /* background-color: rgb(84, 188, 98); */
+  color: rgb(69, 150, 80);
+  font-weight: bold;
 }
 .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
                           90deg,
                           rgb(201, 179, 179) 0%,
                           rgb(187, 187, 187) 35%,
                           rgb(219, 219, 219) 100%
-                        );
+                        ); */
+  color: rgb(101, 101, 101);
+  font-weight: bold;
 }
 
 
@@ -812,7 +842,7 @@ button:hover {
   margin: 8px auto; /* Center the container horizontally */
   padding: 0 20px; /* Optional: Add some padding for spacing */
   border: 1px solid #ffffff; /* Optional: Add a border for visual clarity */
-  box-shadow: 0 2px 4px rgba(150, 150, 150, 0.1); /* Optional: Add a subtle shadow */
+  box-shadow: 0 2px 4px rgba(162, 162, 162, 0.594); /* Optional: Add a subtle shadow */
   background-color: #ffffff; /* Optional: Set a background color */
 
   position: relative;
@@ -1191,6 +1221,7 @@ button:hover {
   text-align: center; /* Center text */
   animation-delay: 3s;
   opacity: 0;
+  color: rgba(30, 29, 29, 0.699)
 }
 
 
@@ -1313,7 +1344,7 @@ button:hover {
 
 .menu-item {
   flex: 1 1 auto;
-  display: flex;
+  display: relative;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -1321,7 +1352,7 @@ button:hover {
   padding: 20px;
   border-radius: 8px;
   border: 1px solid #ffffff;
-  box-shadow: 0 4px 15px rgba(138, 126, 87, 0.113);
+  box-shadow: 0 4px 15px rgba(134, 84, 129, 0.217);
   background-color: #ffffff;
   min-width: 0;
   max-width: calc(49% - 20px);
@@ -1331,7 +1362,7 @@ button:hover {
 .menu-item h4 {
   font-family: 'WindSong', cursive;
   font-size: 1.4rem;
-  margin-top: 0;
+  margin-top: 7px;
   margin-bottom: 30px;
   width: 100%;
   text-align: center;
@@ -1340,11 +1371,13 @@ button:hover {
 
 .menu-item p {
   margin: 3px 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Manrope';
+  font-weight: 1;
   font-size: 1rem;
   width: 100%;
   text-align: center;
   overflow-wrap: break-word;
+  color: #313232f3;
 }
 
 /* Add responsive breakpoints */
@@ -1365,11 +1398,11 @@ button:hover {
 }
 
 .fish-menu {
-  box-shadow: 0 4px 15px rgba(28, 118, 214, 0.175);
+  
 }
 
 .meat-menu {
-  box-shadow: 0 4px 15px rgba(223, 31, 31, 0.175);
+  
 }
 
 
@@ -1427,8 +1460,10 @@ button:hover {
   line-height: 1.8;
   max-width: 600px;
   margin: 0 auto;
-  font-family: 'Raleway', sans-serif;
   color: #4a4a4a;
+
+  font-family: 'Manrope';
+  font-weight: 1;
 }
 
 @keyframes float {

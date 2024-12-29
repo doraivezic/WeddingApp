@@ -210,7 +210,7 @@ const GuestDetails = () => {
         <div className="background-image" style={{minWidth: '300px', position: 'relative'}}>
           <div className="hero-text">
             <h1>Dora & Marin</h1>
-            <p style={{fontSize: '1.1rem', fontFamily: 'Raleway'}}>17.05.2025.</p>
+            <p style={{fontSize: '1.1rem', fontFamily: 'Raleway'}}>01.03.2025.</p>
             <div style={{width: 'fit-content', margin: '0 auto'}}>
               {/* {userMessage && 
                 <p className='user-message'>
@@ -227,14 +227,21 @@ const GuestDetails = () => {
 
         <div className="quote-container" style={{minWidth: '300px'}}>
           <div className="quote-text">
-            <p className="drop-effect">
-              A RUTA JOJ ODGOVORI: 'NEMOJ ME TJERATI DA TE OSTAVIM I DA ODEM OD TEBE:<br/>
-              JER KAMO TI IDEŠ, IDEM I JA I GDJE SE TI NASTANIŠ, NASTANIT ĆU SE I JA;<br/>
-              TVOJ NAROD MOJ JE NAROD I TVOJ BOG MOJ JE BOG.<br/>
-              GDJE TI UMREŠ, UMRIJET ĆU I JA; GDJE TEBE POKOPAJU, POKOPAT ĆE I MENE.<br/>
-              NEKA MI JAHVE UZVRATI SVAKIM ZLOM I NEVOLJOM AKO ME ŠTO DRUGO,<br/>
-              OSIM SMRTI, RASTAVI OD TEBE.' (RUTA 1,16-17)
-            </p>
+          <p className="drop-effect">
+            'Nemoj me tjerati da te ostavim i da odem od tebe:<br/>
+            jer kamo ti ideš, idem i ja<br/>
+            i gdje se ti nastaniš, nastanit ću se i ja;<br/>
+            tvoj narod moj je narod<br/>
+            i tvoj Bog moj je Bog.<br/><br/>
+            Gdje ti umreš, umrijet ću i ja;<br/>
+            gdje tebe pokopaju, pokopat će i mene.<br/>
+            Neka mi Jahve uzvrati svakim zlom i nevoljom<br/>
+            ako me što drugo,<br/>
+            osim smrti,<br/>
+            rastavi od tebe.'<br/><br/>
+            (Ruta 1,16-17)
+          </p>
+
           </div>
         </div>
 
@@ -245,12 +252,12 @@ const GuestDetails = () => {
             <td className="event-content">
               <h3 className='table-event-name'>{language === 'en' ? 'Gathering' : 'Okupljanje'}</h3>
               <div className="time-line left-time-line">
-                <div className="time">11:00</div>
+                <div className="time">12:00</div>
                 <div className="line"></div>
               </div>
               <p className='table-location-exact'>
-                Crkva Pohoda Bl. Djevice Marije
-                <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Bale</p>
+                Marina Punat
+                <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Punat, Krk</p>
               </p>
               <a href="https://www.google.com/maps/search/?api=1&query=Crkva+Pohoda+Bl.+Djevice+Marije,+Bale"
                  target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
@@ -263,18 +270,18 @@ const GuestDetails = () => {
           </tr>
 
           <tr>
-            <td className="icon" style={{paddingRight: '10px'}}>
-              <img src='/ring-icon.svg' alt="Rings" style={{transform: 'rotate(-45deg)'}}/>
+            <td className="icon" style={{paddingLeft: '10px'}}>
+              <img src='/cocktail-icon.svg' alt="Cocktail"/>
             </td>
             <td className="event-content">
-              <h3 className='table-event-name'>{language === 'en' ? 'Church Wedding' : 'Vjenčanje'}</h3>
+              <h3 className='table-event-name'>{language === 'en' ? 'Boat ride' : 'Vožnja brodom'}</h3>
               <div className="time-line right-time-line">
                 <div className="line"></div>
-                <div className="time">13:00</div>
+                <div className="time">12:30</div>
               </div>
               <p className='table-location-exact'>
-                Crkva Pohoda Bl. Djevice Marije
-                <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Bale</p>
+                Marina Punat
+                <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Punat, Krk</p>
               </p>
               <a href="https://www.google.com/maps/search/?api=1&query=Crkva+Pohoda+Bl.+Djevice+Marije,+Bale"
                  target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
@@ -285,22 +292,43 @@ const GuestDetails = () => {
 
           <tr>
             <td className="event-content">
-              <h3 className='table-event-name'>{language === 'en' ? 'Dinner' : 'Svečana večera'}</h3>
+              <h3 className='table-event-name'>{language === 'en' ? 'Church Wedding' : 'Vjenčanje'}</h3>
               <div className="time-line left-time-line">
-                <div className="time">15:00</div>
+                <div className="time">13:00</div>
                 <div className="line"></div>
               </div>
               <p className='table-location-exact'>
-                Meneghetti Wine Hotel & Winary
-                <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Bale</p>
+                Crkva navještenja Marijina
+                <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Otok Košljun</p>
+              </p>
+              <a href="https://www.google.com/maps/search/?api=1&query=Crkva+Pohoda+Bl.+Djevice+Marije,+Bale"
+                 target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
+                <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
+              </a>
+            </td>
+            <td className="icon" style={{paddingRight: '10px'}}>
+              <img src='/ring-icon.svg' alt="Rings" style={{transform: 'rotate(-45deg)'}}/>
+            </td>
+          </tr>
+
+          <tr>
+            <td className="icon" style={{paddingLeft: '10px'}}>
+              <img src='/restaurant-icon.svg' alt="Dinner"/>
+            </td>
+            <td className="event-content">
+              <h3 className='table-event-name'>{language === 'en' ? 'Dinner' : 'Svečana večera'}</h3>
+              <div className="time-line right-time-line">
+                <div className="line"></div>
+                <div className="time">15:00</div>
+              </div>
+              <p className='table-location-exact'>
+                Restoran Marina
+                <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Punat, Krk</p>
               </p>
               <a href="https://www.google.com/maps/search/?api=1&query=Meneghetti+Wine+Hotel,+Bale" target="_blank"
                  rel="noreferrer" style={{textDecoration: 'none'}}>
                 <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
               </a>
-            </td>
-            <td className="icon" style={{paddingLeft: '10px'}}>
-              <img src='/restaurant-icon.svg' alt="Dinner"/>
             </td>
           </tr>
 
@@ -355,21 +383,20 @@ const GuestDetails = () => {
           <h3>{language === 'en' ? 'Dress code' : 'Dress code'}</h3>
           <div className="dress-code-container">
             <div className="dress-code-emoji-container">
-              <span role="img" aria-label="rainbow">🌈</span>
-              <span role="img" aria-label="dress">👗</span>
-              <span role="img" aria-label="suit">🕴️</span>
+              <span role="img" aria-label="suit">💃</span>
+              <span role="img" aria-label="suit">🕺</span>
             </div>
             <p className="dress-code-text">
               {language === 'en' ? (
                 <>
                   If possible, we kindly ask you to wear colorful attire!<br/>
-                  Let's avoid dark colors and celebrate with vibrant hues 🌸<br/>
+                  Let's avoid dark colors and celebrate with vibrant hues<br/>
                   (But don't worry if you can't - we're just happy to have you there! ❤️)
                 </>
               ) : (
                 <>
                   Ako ste u mogućnosti, pozivamo vas da nosite pastelne boje!<br/>
-                  Izbjegavajmo tamno i proslavimo u veselim tonovima 🌸<br/>
+                  Izbjegavajmo tamno i proslavimo u veselim tonovima<br/>
                   (Ali bez brige ako ne možete - najvažnije nam je da ste s nama! ❤️)
                 </>
               )}
@@ -380,27 +407,34 @@ const GuestDetails = () => {
         <div className="content-container">
           <h3>{language === 'en' ? 'Menu' : 'Meni'}</h3>
           <div className="menu-container">
-            <div className="menu-item fish-menu" >
+
+            <div className="menu-item" >
               <h4>{language === 'en' ? 'Fish Menu' : 'Riblji Meni'}</h4>
-              <p>Koktel od škampi, kuglica od brancina, dimljena tuna, domaći kruh</p>
-              <p>•</p>
-              <p> Krem juha od celera, jabuke i tartufa</p>
-              <p>•</p>
-              <p>File bijele ribe u škartovu sa povrćem i pave krumpirom</p>
-              <p>•</p>
-              <p>Šurlice sa kozicama</p>
+              <div className="fish-menu" >
+                <p>Koktel od škampi, kuglica od brancina, dimljena tuna, domaći kruh</p>
+                <p>•</p>
+                <p> Krem juha od celera, jabuke i tartufa</p>
+                <p>•</p>
+                <p>File bijele ribe u škartocu sa povrćem i pave krumpirom</p>
+                <p>•</p>
+                <p>Šurlice sa kozicama</p>
+              </div>
             </div>
-            <div className="menu-item meat-menu">
+
+            <div className="menu-item">
               <h4>{language === 'en' ? 'Meat Menu' : 'Mesni Meni'}</h4>
-              <p>Rolica od skute i pršuta, krčka kobasicam vege tartar, selekcija sireva, pikantna salsa, domaći kruh</p>
-              <p>•</p>
-              <p>Krem juha od celera, jabuke i tartufa</p>
-              <p>•</p>
-              <p>Sporo pečena teletina sa demiglas umakom i pave krumpitom</p>
-              <p>•</p>
-              <p>Šurlice s gulašom</p>
+              <div className="meat-menu" >
+                <p>Rolica od skute i pršuta, krčka kobasicam vege tartar, selekcija sireva, pikantna salsa, domaći kruh</p>
+                <p>•</p>
+                <p>Krem juha od celera, jabuke i tartufa</p>
+                <p>•</p>
+                <p>Sporo pečena teletina sa demiglas umakom i pave krumpitom</p>
+                <p>•</p>
+                <p>Šurlice s gulašom</p>
+              </div>
             </div>
           </div>
+
         </div>
 
 
@@ -408,9 +442,9 @@ const GuestDetails = () => {
           <h3>{language === 'en' ? 'Accept invitation' : 'Potvrdite dolazak'}</h3>
           <p className='confirm-arrival'>
             {language === 'en' ? (
-                <>PLEASE CONFIRM YOUR ARRIVAL UNTIL <b>31.01.2024.</b></>
+                <>PLEASE CONFIRM YOUR ARRIVAL UNTIL <b>31.01.2025.</b></>
             ) : (
-                <>MOLIMO POTVRDITE SVOJ DOLAZAK DO <b>31.01.2024.</b></>
+                <>MOLIMO POTVRDITE SVOJ DOLAZAK DO <b>31.01.2025.</b></>
             )}
           </p>
 

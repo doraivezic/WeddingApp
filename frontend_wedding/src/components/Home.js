@@ -68,7 +68,7 @@ const Home = () => {
           <img src="/image.png" alt="Dora-Marin" className="hero-image" />
           <div className="hero-text">
             <h1 className='typing-effect'>Dora & Marin</h1>
-            <p style={{fontSize: '1.3rem', fontFamily: 'Raleway'}}>17.05.2025.</p>
+            <p style={{fontSize: '1.3rem', fontFamily: 'Raleway'}}>01.03.2025.</p>
           </div>
           <div className="separator"></div>
         </div>
@@ -114,7 +114,7 @@ const Home = () => {
             </span>
 
             <div>
-              <label>{language === 'en' ? 'Username' : 'Korisničko ime'}</label>
+              <label style={{fontFamily: 'Manrope', fontWeight: '500'}}>{language === 'en' ? 'Username' : 'Korisničko ime'}</label>
               <input
                   type="text"
                   value={username}
@@ -123,7 +123,7 @@ const Home = () => {
               />
             </div>
             <div>
-              <label>{language === 'en' ? 'Password' : 'Lozinka'}</label>
+              <label style={{fontFamily: 'Manrope', fontWeight: '500'}}>{language === 'en' ? 'Password' : 'Lozinka'}</label>
               {/* Dodaj botuncic za pomoc */}
               {/* <input
                   type="password"
