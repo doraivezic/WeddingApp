@@ -228,18 +228,10 @@ const GuestDetails = () => {
         <div className="quote-container" style={{minWidth: '300px'}}>
           <div className="quote-text">
           <p className="drop-effect">
-            'Nemoj me tjerati da te ostavim i da odem od tebe:<br/>
-            jer kamo ti ideš, idem i ja<br/>
-            i gdje se ti nastaniš, nastanit ću se i ja;<br/>
-            tvoj narod moj je narod<br/>
-            i tvoj Bog moj je Bog.<br/><br/>
-            Gdje ti umreš, umrijet ću i ja;<br/>
-            gdje tebe pokopaju, pokopat će i mene.<br/>
-            Neka mi Jahve uzvrati svakim zlom i nevoljom<br/>
-            ako me što drugo,<br/>
-            osim smrti,<br/>
-            rastavi od tebe.'<br/><br/>
-            (Ruta 1,16-17)
+            U Tvoje ruke stavljamo sve na dar,<br/>
+            sve svoje dane, ljubavi i planove.<br/>
+            Nova obitelj tu nastaje pred Tobom.<br/>
+            Ti čuvaj, vodi je!<br/>
           </p>
 
           </div>
@@ -379,7 +371,7 @@ const GuestDetails = () => {
                               
       </div> */}
 
-        <div className="content-container">
+        <div className="content-container" style={{marginTop: '80px'}}>
           <h3>{language === 'en' ? 'Dress code' : 'Dress code'}</h3>
           <div className="dress-code-container">
             <div className="dress-code-emoji-container">
@@ -395,7 +387,7 @@ const GuestDetails = () => {
                 </>
               ) : (
                 <>
-                  Ako ste u mogućnosti, pozivamo vas da nosite pastelne boje!<br/>
+                  Ako ste u mogućnosti, pozivamo vas da nosite boje!<br/>
                   Izbjegavajmo tamno i proslavimo u veselim tonovima<br/>
                   (Ali bez brige ako ne možete - najvažnije nam je da ste s nama! ❤️)
                 </>

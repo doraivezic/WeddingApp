@@ -123,12 +123,19 @@ button:hover {
   /*background-size: cover; *
   margin-top: -20vh; /* Overlap the separator slightly with the image */
   /* background: linear-gradient(to bottom, transparent, var(--background-color)); */
-    background: linear-gradient(to bottom, 
-    transparent 0%,
-    transparent 50%,
-    var(--background-color) 75%,
-    var(--background-color) 100%
-);
+  /*  background: linear-gradient(to bottom, */
+  /*      transparent 0%,*/
+  /*      transparent 30%,*/
+  /*      transparent 75%,*/
+  /*      var(--background-color) 100%*/
+  /*  );*/
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.001) 0%,
+    rgba(255, 255, 255, 0.005) 30%,
+    /*rgba(255, 255, 255, 0.01) 40%,*/
+    /*rgba(255, 255, 255, 0.4) 70%,*/
+    /*rgba(255, 255, 255, 0.85) 90%,*/
+    var(--background-color));
 }
 
 /* .separator {
@@ -414,7 +421,7 @@ textarea {
   width: 55%;
   min-width: 280px;
   margin: 0 auto;
-  margin-top: 80px;
+  margin-top: 40px;
   max-width: 600px;
 }
 /* Responsive styles for small screens */
@@ -527,6 +534,8 @@ button:hover {
   z-index: 1000;
   display: inline-block;
   text-align: center;
+  /*align-items: center;*/
+  /*justify-content: center;*/
 }
 
 
@@ -1419,6 +1428,7 @@ button:hover {
   overflow: hidden;
   margin: 20px auto;
   max-width: 800px;
+  margin-bottom: 0;
 }
 
 .dress-code-container::before {
