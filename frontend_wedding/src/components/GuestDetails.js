@@ -251,7 +251,7 @@ const GuestDetails = () => {
                 Marina Punat
                 <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Punat, Krk</p>
               </p>
-              <a href="https://www.google.com/maps/search/?api=1&query=Crkva+Pohoda+Bl.+Djevice+Marije,+Bale"
+              <a href="https://www.google.com/maps/search/?api=1&query=Franjevacki,samostan,Navjestenja,Marijina,+Krk"
                  target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
                 <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
               </a>
@@ -293,7 +293,7 @@ const GuestDetails = () => {
                 Crkva navještenja Marijina
                 <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Otok Košljun</p>
               </p>
-              <a href="https://www.google.com/maps/search/?api=1&query=Crkva+Pohoda+Bl.+Djevice+Marije,+Bale"
+              <a href="https://www.google.com/maps/search/?api=1&query=Franjevacki,samostan,Navjestenja,Marijina,+Krk"
                  target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
                 <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
               </a>
@@ -317,7 +317,7 @@ const GuestDetails = () => {
                 Restoran Marina
                 <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Punat, Krk</p>
               </p>
-              <a href="https://www.google.com/maps/search/?api=1&query=Meneghetti+Wine+Hotel,+Bale" target="_blank"
+              <a href="https://www.google.com/maps/search/?api=1&query=Restoran+Marina,+Punat" target="_blank"
                  rel="noreferrer" style={{textDecoration: 'none'}}>
                 <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
               </a>
