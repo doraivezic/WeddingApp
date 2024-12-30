@@ -178,6 +178,12 @@ def get_all_form_responses():
 @app.route('/api/form_responses', methods=['POST'])
 def submit_form_response():
     data = request.json
+
+    # Validation: If accepted is True, menu_option cannot be empty
+    if data.get('accepted') and not data.get('menu_option'):
+        return jsonify({'error': 'Menu option is required if the invitation is accepted.'}), 400
+
+
     existing_response = FormResponse.query.filter_by(name_surname=data['name_surname'],
                                                      user_username=data['user_username']).first()
     if existing_response:

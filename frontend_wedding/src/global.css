@@ -134,7 +134,7 @@ button:hover {
     rgba(255, 255, 255, 0.005) 30%,
     /*rgba(255, 255, 255, 0.01) 40%,*/
     /*rgba(255, 255, 255, 0.4) 70%,*/
-    /*rgba(255, 255, 255, 0.85) 90%,*/
+    rgba(255, 255, 255, 0.86) 90%,
     var(--background-color));
 }
 
@@ -365,10 +365,10 @@ textarea {
 
 .hero-text {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: gray;
+  color: rgba(107, 101, 98, 0.8);
   font-size: 2rem;
   text-align: center;
   font-family: 'WindSong', cursive;
@@ -427,7 +427,7 @@ textarea {
 /* Responsive styles for small screens */
 @media (max-width: 1100px) {
   .content-container {
-    width: 70%; /* Increase width to 90% for small screens */
+    width: 75%; /* Increase width to 90% for small screens */
     padding: 1rem; /* Reduce padding if necessary */
     /* min-width: 250px; */
   }
@@ -728,7 +728,7 @@ button:hover {
 
 .tri-state-toggle {
     background: transparent;/* rgba(242, 235, 229, 0.894) */
-    box-shadow: inset 0 2px 8px 0 rgba(165,170,174,0.25);
+    box-shadow: inset 0 2px 8px 0 rgba(123, 125, 133, 0.25);
     border-radius: 24px;
     overflow: hidden;
     display: inline-flex;  /* inline-flex */
@@ -745,16 +745,17 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 64px;
+    width: 5rem;
     background-color: transparent;
     border: 0px solid transparent;
     margin: 2px;
-    color: rgb(113, 113, 113);
+    color: rgb(222, 218, 218);
+    /*font-weight: bold;*/
     cursor: pointer;
     padding:1px;
     margin-left: 2px;
     margin-right: 2px;
-    font-size: 10px;
+    font-size: 12px;
     /* width: auto; */
   
 /*    -webkit-transition: all 0.5s ease-in-out;
@@ -765,25 +766,52 @@ button:hover {
 }
 @media (max-width: 900px) {
   .tri-state-toggle-button {
-      font-size: 9px; /* Smaller font size for small screens */
-      width: 3rem;
+      font-size: 12px; /* Smaller font size for small screens */
+      width: 5rem;
+  }
+  .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
+    font-size: 11px;
   }
 }
 @media (max-width: 700px) {
   .tri-state-toggle-button {
-      font-size: 8px; /* Even smaller font size for very small screens */
-      width: 3rem;
+      font-size: 11px; /* Even smaller font size for very small screens */
+      width: 4rem;
+  }
+  .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
+    font-size: 10px;
   }
 }
 @media (max-width: 400px) {
   .tri-state-toggle-button {
-      font-size: 6px; /* Even smaller font size for very small screens */
-      width: 2rem;
+      font-size: 10px; /* Even smaller font size for very small screens */
+      width: 3.5rem;
+  }
+  .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
+    font-size: 9px;
+  }
+}
+@media (max-width: 370px) {
+  .tri-state-toggle-button {
+      font-size: 9px; /* Even smaller font size for very small screens */
+      width: 2.9rem;
+  }
+  .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
+    font-size: 8px;
+  }
+}
+@media (max-width: 300px) {
+  .tri-state-toggle-button {
+      font-size: 9px; /* Even smaller font size for very small screens */
+      width: 2.7rem;
+  }
+  .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
+    font-size: 8px;
   }
 }
 
 .tri-state-toggle-button:hover {
-  background-color: rgba(36, 31, 31, 0.119);
+  background-color: rgba(171, 164, 164, 0.12);
 }
 
 .tri-state-toggle-button.active {
@@ -795,7 +823,7 @@ button:hover {
                         ); */
   border: 0px solid rgba(207, 207, 207, 0.655);
   /* box-shadow: 0 8px 10px 0 rgba(164, 164, 164, 0.1); */
-  box-shadow: 0 1px 0 0 rgba(90, 90, 90, 0.331);
+  box-shadow: 1px 1px 1px 1px rgba(72, 71, 69, 0.33);
   color: white;
   font-weight: 500;
   transition: all .5s ease-in;
@@ -815,6 +843,7 @@ button:hover {
   /* background-color: rgb(174, 53, 34); */
   color: rgb(174, 53, 34);
   font-weight: bold;
+  /*border: 2px solid rgb(174, 53, 34);*/
 }
 .tri-state-toggle-button.active.tri-state-toggle-button-accepted {
   /* background-image: linear-gradient(
@@ -834,7 +863,7 @@ button:hover {
                           rgb(187, 187, 187) 35%,
                           rgb(219, 219, 219) 100%
                         ); */
-  color: rgb(101, 101, 101);
+  color: rgb(178, 176, 176);
   font-weight: bold;
 }
 
@@ -845,19 +874,19 @@ button:hover {
   flex-direction: column; /* Align children vertically */
   /*align-items: center; /* Center children horizontally */
   /*justify-content: center; /* Center children vertically */
-  width: 70%; /* Set a narrow width */
+  width: 75%; /* Set a narrow width */
   /* min-width: 250px;
   max-width: 500px; */
   margin: 8px auto; /* Center the container horizontally */
   padding: 0 20px; /* Optional: Add some padding for spacing */
   border: 1px solid #ffffff; /* Optional: Add a border for visual clarity */
-  box-shadow: 0 2px 4px rgba(162, 162, 162, 0.594); /* Optional: Add a subtle shadow */
+  box-shadow: -2px 0 4px rgba(192, 175, 170, 0.59); /* Optional: Add a subtle shadow */
   background-color: #ffffff; /* Optional: Set a background color */
 
   position: relative;
   font-family: 'Raleway';
   /* font-weight: 60; */
-  font-size: 0.7rem;
+  font-size: 0.77rem;
 }
 /* Reset margins for common elements */
 .guests-forms-container div {
@@ -866,7 +895,20 @@ button:hover {
 }
 .guests-forms-container label{
   margin: 0;
-} 
+}
+
+.guests-forms-name {
+  margin-right: 5px;
+  font-family: 'WindSong';
+  font-size: 1.6rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .guests-forms-name {
+    font-size: 1.5rem;
+  }
+}
 
 .guest-input-menu {
   display: flex;
@@ -875,10 +917,15 @@ button:hover {
   font-weight: 400;
   padding: 1px;
 }
+@media (max-width: 700px) {
+  .guest-input-menu {
+    font-size: 0.85rem;
+  }
+}
 
 .update-changes-button {
-  width: 30%; /* Set a narrow width */
-  min-width: 250px;
+  width: 25%; /* Set a narrow width */
+  min-width: 230px;
   margin: 10px auto;
   margin-bottom: 50px;
 }
@@ -1031,12 +1078,12 @@ button:hover {
   margin-left: 10px;
   margin-right: 10px;
 }
-@media (max-width: 768px) { /* Adjust the max-width as needed */
+@media (max-width: 568px) { /* Adjust the max-width as needed */
   .table-event-name{
     font-size: 1.5rem;
   }
   .table-location-exact{
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
   .time{
     font-size: 0.95rem;
@@ -1073,7 +1120,7 @@ button:hover {
 }
 
 .icon img {
-  width: 6rem; /* Adjusted width for icons */
+  width: 6em; /* Adjusted width for icons */
   height: auto; /* Maintain aspect ratio */
   /*max-width: 100%; /* Ensure it doesn't exceed the container's width */
   margin-bottom: 6rem;
@@ -1247,13 +1294,19 @@ button:hover {
   text-align: center; /* Center text within the container */
   margin-top: 90px;
   margin-bottom: 120px;
+  font-size: 1.1rem;
 }
 
 .quote-text {
   margin: 0 auto; /* Center the text block */
+  line-height: 1.8rem;
 }
-
-@media (max-width: 500px) {
+@media (max-width: 600px) {
+  .quote-container {
+      font-size: 0.9rem; /* Adjust right position for small screens */
+  }
+}
+@media (max-width: 400px) {
   .quote-container {
       font-size: 0.85rem; /* Adjust right position for small screens */
   }
@@ -1344,6 +1397,7 @@ button:hover {
   display: flex;
   justify-content: space-between; 
   margin: 0 auto;
+  margin-top: 20px;
   gap: 7px;
   width: 100%;
   flex-wrap: wrap;
@@ -1382,11 +1436,12 @@ button:hover {
   margin: 3px 0;
   font-family: 'Manrope';
   font-weight: 1;
-  font-size: 1rem;
+  font-size: 0.99rem;
   width: 100%;
   text-align: center;
   overflow-wrap: break-word;
-  color: #313232f3;
+  /*color: #313232f3;*/
+  color: #4a4a4a;
 }
 
 /* Add responsive breakpoints */
@@ -1503,4 +1558,42 @@ button:hover {
     font-size: 1rem;
     line-height: 1.6;
   }
+}
+
+
+@media (max-width: 400px) {
+  .leave-message{
+    padding: 15px;
+  }
+}
+
+
+
+.select-line {
+  appearance: none; /* Remove default styling */
+  border: none; /* Remove the border */
+  border-bottom: 1px ridge #c2b9b9; /* Add a bottom border */
+  /*padding: 5px 0; !* Add some padding *!*/
+  font-size: 0.95em; /* Adjust font size */
+  outline: none; /* Remove the focus outline */
+  background: none; /* Remove the background color */
+  color: black; /* Text color */
+  width: 100%; /* Full width */
+  border-radius: 0px;
+  margin-left: 15px;
+  padding: 2px;
+  padding-left: 10px;
+}
+
+.select-line:focus {
+  border-bottom: 2px solid blue; /* Highlight the border when focused */
+}
+
+.select-line option {
+  background: white; /* Ensure dropdown options have a background */
+}
+.select-line input {
+  background: white; /* Ensure dropdown options have a background */
+  font-family: 'Raleway', sans-serif;
+  color: #333333;
 }

@@ -5,6 +5,7 @@ import GuestDetails from './components/GuestDetails';
 import Admin from './components/Admin';
 import { LanguageProvider, LanguageContext } from './contexts/LanguageContext';
 import { AuthProvider, AuthContext } from './contexts/AuthContext';
+import { NotificationProvider } from './contexts/NotificationContext';
 import './global.css';
 
 const LanguageToggleButton = () => {
@@ -50,21 +51,23 @@ const ProtectedRoute = ({ role, component: Component }) => {
 
 function App() {
   return (
-    <LanguageProvider>
-      <AuthProvider>
-        <Router>
-          <div className="container">
-            <LanguageToggleButton />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/guest-details" element={<ProtectedRoute role="guest" component={GuestDetails} />} />
-              <Route path="/admin" element={<ProtectedRoute role="admin" component={Admin} />} />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </div>
-        </Router>
-      </AuthProvider>
-    </LanguageProvider>
+    <NotificationProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <Router>
+            <div className="container">
+              <LanguageToggleButton />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/guest-details" element={<ProtectedRoute role="guest" component={GuestDetails} />} />
+                <Route path="/admin" element={<ProtectedRoute role="admin" component={Admin} />} />
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </div>
+          </Router>
+        </AuthProvider>
+      </LanguageProvider>
+    </NotificationProvider>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import { NotificationContext } from '../contexts/NotificationContext';
 import {LanguageContext} from "../contexts/LanguageContext";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +16,7 @@ const GuestDetails = () => {
   const [comment, setComment] = useState('');
   const [showCommentSection, setShowCommentSection] = useState(false);
   const [userMessage, setUserMessage] = useState('');
+  const { showNotification } = useContext(NotificationContext);
 
   const UserMessage = ({ message }) => {
     const [displayedText, setDisplayedText] = useState('');
@@ -56,6 +58,7 @@ const GuestDetails = () => {
         const data = await response.json();
         if (response.ok) {
           setUserMessage(data.message);
+          console.log('Ispisujem message')  //Called many times, cannot remove it
         } else {
           console.error('Error fetching user details:', data.error);
         }
@@ -156,14 +159,32 @@ const GuestDetails = () => {
       })
     );
 
-    Promise.all(promises).then(results => {
+    Promise.all(promises)
+    .then(results => {
+      const jsonPromises = results.map(result =>
+        result.ok ? null : result.json() // Parse JSON only for failed requests
+      );
+
+      return Promise.all(jsonPromises).then(errors => ({
+        results,
+        errors,
+      }));
+    })
+    .then(({ results, errors }) => {
       if (results.every(result => result.ok)) {
-        alert('Changes updated successfully!');
+        showNotification('success','Changes updated successfully!');
         const hasAccepted = responses.some(response => response.accepted);
         setShowCommentSection(hasAccepted);
       } else {
-        alert('Error updating changes');
+        const errorMessages = errors
+          .filter(error => error) // Filter out null values (successful responses)
+          .map(error => error.error || 'Unknown error'); // Extract error message
+        showNotification('error', `Unable to update changes:\n${errorMessages[0]}`);
       }
+    })
+    .catch(err => {
+      console.error('Unexpected error:', err);
+      showNotification('error', 'An unexpected error occurred.');
     });
   };
 
@@ -178,10 +199,10 @@ const GuestDetails = () => {
     });
 
     if (response.ok) {
-      alert('Comment submitted successfully!');
+      showNotification('success', 'Comment submitted successfully!');
       setComment('');
     } else {
-      alert('Error submitting comment');
+      showNotification('error', 'Error submitting comment');
     }
   };
 
@@ -210,16 +231,17 @@ const GuestDetails = () => {
         <div className="background-image" style={{minWidth: '300px', position: 'relative'}}>
           <div className="hero-text">
             <h1>Dora & Marin</h1>
-            <p style={{fontSize: '1.1rem', fontFamily: 'Raleway'}}>01.03.2025.</p>
-            <div style={{width: 'fit-content', margin: '0 auto'}}>
-              {/* {userMessage && 
+            <p style={{fontSize: '1.1rem', fontFamily: 'Raleway', color: 'rgb(100, 95, 92)'}}>01.03.2025.</p>
+            <div style={{width: 'fit-content', margin: '0 auto', fontSize: '1rem'}}>
+              {/* {userMessage &&
                 <p className='user-message'>
                   {userMessage}
                 </p>
               } */}
-              {userMessage &&
-                  <UserMessage message={userMessage}/>
-              }
+              {/*{userMessage &&*/}
+              {/*    <UserMessage message={userMessage}/>*/}
+              {/*}*/}
+              {/* {userMessage}*/}
             </div>
           </div>
           <div className="separator" style={{minWidth: '300px'}}></div>
@@ -251,7 +273,7 @@ const GuestDetails = () => {
                 Marina Punat
                 <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Punat, Krk</p>
               </p>
-              <a href="https://www.google.com/maps/search/?api=1&query=Franjevacki,samostan,Navjestenja,Marijina,+Krk"
+              <a href="https://www.google.com/maps/search/?api=1&query=Mairna,Punat,d.o.o.,+Krk"
                  target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
                 <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
               </a>
@@ -263,7 +285,7 @@ const GuestDetails = () => {
 
           <tr>
             <td className="icon" style={{paddingLeft: '10px'}}>
-              <img src='/cocktail-icon.svg' alt="Cocktail"/>
+              <img src='/boat-icon.svg' alt="Boat"/>
             </td>
             <td className="event-content">
               <h3 className='table-event-name'>{language === 'en' ? 'Boat ride' : 'Vožnja brodom'}</h3>
@@ -275,7 +297,7 @@ const GuestDetails = () => {
                 Marina Punat
                 <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Punat, Krk</p>
               </p>
-              <a href="https://www.google.com/maps/search/?api=1&query=Crkva+Pohoda+Bl.+Djevice+Marije,+Bale"
+              <a href="https://www.google.com/maps/search/?api=1&query=Mairna,Punat,d.o.o.,+Krk"
                  target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
                 <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
               </a>
@@ -396,12 +418,12 @@ const GuestDetails = () => {
           </div>
         </div>
 
-        <div className="content-container">
+        <div className="content-container" style={{maxWidth: '900px'}}>
           <h3>{language === 'en' ? 'Menu' : 'Meni'}</h3>
           <div className="menu-container">
 
             <div className="menu-item" >
-              <h4>{language === 'en' ? 'Fish Menu' : 'Riblji Meni'}</h4>
+              <h4>{language === 'en' ? 'Fish Menu' : 'Riblji  Meni'}</h4>
               <div className="fish-menu" >
                 <p>Koktel od škampi, kuglica od brancina, dimljena tuna, domaći kruh</p>
                 <p>•</p>
@@ -414,7 +436,7 @@ const GuestDetails = () => {
             </div>
 
             <div className="menu-item">
-              <h4>{language === 'en' ? 'Meat Menu' : 'Mesni Meni'}</h4>
+              <h4>{language === 'en' ? 'Meat Menu' : 'Mesni  Meni'}</h4>
               <div className="meat-menu" >
                 <p>Rolica od skute i pršuta, krčka kobasicam vege tartar, selekcija sireva, pikantna salsa, domaći kruh</p>
                 <p>•</p>
@@ -439,62 +461,15 @@ const GuestDetails = () => {
                 <>MOLIMO POTVRDITE SVOJ DOLAZAK DO <b>31.01.2025.</b></>
             )}
           </p>
+          <p className='confirm-arrival' style={{color: "gray", fontSize: '12px'}}>
+            {language === 'en' ? (
+                <>** THE INVITE IS FOR ADULTS ONLY (12+) **</>
+            ) : (
+                <>** POZIVNICA VRIJEDI SAMO ZA ODRASLE (12+) **</>
+            )}
+          </p>
 
-          {/* {responses.length === 0 && nameSurnames.map((ns, index) => (
-            <form key={index} onSubmit={handleUpdateChanges}>
-              <div>
-                <label>
-                  Name Surname:
-                  <input type="text" value={ns.name_surname} disabled/>
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input
-                      type="checkbox"
-                      checked={responses[index]?.accepted || false}
-                      onChange={(e) =>
-                          handleResponseChange(index, 'accepted', e.target.checked)
-                      }
-                  />
-                </label>
-              </div>
-              {responses[index]?.accepted && (
-                  <>
-                    <div>
-                      <label>
-                        {language === 'en' ? 'Menu Option:' : 'Odabir menija:'}
-                        <select
-                            value={responses[index]?.menu_option || ''}
-                            onChange={(e) =>
-                                handleResponseChange(index, 'menu_option', e.target.value)
-                            }
-                        >
-                          <option value="">Select...</option>
-                          <option value="vegetarian">Vegetarian</option>
-                          <option value="non-vegetarian">Non-Vegetarian</option>
-                          <option value="vegan">Vegan</option>
-                        </select>
-                      </label>
-                    </div>
-                    <div>
-                      <label>
-                        {language === 'en' ? 'Allergies:' : 'Alergije:'}
-                        <input
-                            type="text"
-                            value={responses[index]?.allergies || ''}
-                            onChange={(e) =>
-                                handleResponseChange(index, 'allergies', e.target.value)
-                            }
-                        />
-                      </label>
-                    </div>
-                  </>
-              )}
-            </form>
-        ))} */}
           {responses.length > 0 && responses.map((response, index) => {
-            // const { label, color, checked } = getToggleState(response);
 
             return (
                 <form key={index} onSubmit={handleUpdateChanges} className='guests-forms-container'>
@@ -504,30 +479,9 @@ const GuestDetails = () => {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     paddingTop: '10px',
-                    paddingBottom: '10px'
+                    paddingBottom: '5px'
                   }}>
-                    <label style={{
-                      marginRight: '5px',
-                      fontFamily: 'WindSong',
-                      fontSize: '1.4rem',
-                      fontWeight: '500',
-                      whiteSpace: 'nowrap'
-                    }}>{response.name_surname}</label>
-                    {/* <div className="toggle-switch" style={{ backgroundColor: color }}>
-                  <input
-                    type="checkbox"
-                    id={`toggle-${index}`}
-                    checked={response.accepted === true} // Only checked if accepted is true
-                    onChange={(e) => {
-                      const newValue = e.target.checked ? true : false;
-                      handleResponseChange(index, 'accepted', newValue);
-                    }}
-                    style={{ display: 'none' }} // Hide the default checkbox
-                  />
-                  <label htmlFor={`toggle-${index}`} className="toggle-label" style={{ backgroundColor: color }}>
-                    {label}
-                  </label>
-                </div> */}
+                    <label className='guests-forms-name'>{response.name_surname}</label>
 
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                     <div className="tri-state-toggle">
@@ -564,45 +518,37 @@ const GuestDetails = () => {
                   <div className={`transition-container ${response.accepted === true ? 'show' : ''}`}>
                     <label className='guest-input-menu'>
                       {language === 'en' ? 'MENU OPTION:' : 'ODABIR MENIJA:'}
-                      <select
+                      <select className='select-line'
                           value={response.menu_option}
                           onChange={(e) =>
                               handleResponseChange(index, 'menu_option', e.target.value)
                           }
                           required
                           style={{
-                            marginLeft: '15px',
-                            padding: '2px',
-                            fontSize: '0.8em',
-                            width: '100%',
-                            color: 'gray',
+                            color: '#333333',
+                            fontFamily: 'Manrope'
                           }}
                       >
-                        <option value="">Select...</option>
-                        <option value="vegetarian">{language === 'en' ? 'Vegan' : 'Veganski'}</option>
-                        <option value="non-vegetarian">{language === 'en' ? 'Fish' : 'Riblji'}</option>
-                        <option value="vegan">{language === 'en' ? 'Meat' : 'Mesni'}</option>
+                        <option value="" disabled selected>{language === 'en' ? 'Select...' : 'Odaberi...'}</option>
+                        <option value="fish">{language === 'en' ? 'Fish' : 'Riblji'}</option>
+                        <option value="meat">{language === 'en' ? 'Meat' : 'Mesni'}</option>
                       </select>
                     </label>
 
                     <label className='guest-input-menu'>
                       {language === 'en' ? 'ALLERGIES:' : 'ALERGIJE:'}
                       <input
-                          type="text"
+                          className='select-line'
+                          // type="text"
+                          value={response.allergies}
                           value={response.allergies}
                           onChange={(e) =>
                               handleResponseChange(index, 'allergies', e.target.value)
                           }
                           style={{
-                            // height: '1.5em',
-                            marginLeft: '15px',
-                            padding: '4px',
-                            paddingLeft: '6px',
-                            fontSize: '0.8em',
-                            // paddingTop: '0px',
-                            // paddingBottom: '0px',
+                            color: '#333333',
                             marginBottom: '0px',
-                            color: 'gray',
+                            fontFamily: 'Manrope'
                           }}
                       />
                     </label>
@@ -617,7 +563,7 @@ const GuestDetails = () => {
               </button>
           )}
           {showCommentSection && (
-              <form onSubmit={handleCommentSubmit} style={{marginTop: '100px', marginBottom: '0'}}>
+              <form className='leave-message' onSubmit={handleCommentSubmit} style={{marginTop: '100px', marginBottom: '0'}}>
                 <div>
                   <label style={{fontFamily: 'Hurricane', fontWeight: '400', fontSize: '30px'}}>
                     {language === 'en' ? 'Leave us a message' : 'Ostavite nam poruku'}
