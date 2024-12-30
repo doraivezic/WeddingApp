@@ -1,10 +1,9 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from flask_migrate import Migrate
+# from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, send_from_directory
-# from asgiref.wsgi import WsgiToAsgi
 import os
 
 # app = Flask(__name__)
@@ -17,8 +16,18 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-from flask_migrate import Migrate
-migrate = Migrate(app, db)  # Initialize Flask-Migrate
+# migrate = Migrate(app, db)  # Initialize Flask-Migrate
+
+
+@app.route('/check-db-health', methods=['GET'])
+def db_health():
+    try:
+        responses = FormResponse.query.all()
+        db.execute('SELECT 1')  # Simple query to test the database connection
+        db.close()  # Always close the connection
+        return "Database is alive", 200
+    except Exception as e:
+        return f"Error: {e}", 500
 
 @app.route('/')
 def serve():
@@ -251,5 +260,4 @@ def get_user_comments(user_username):
     return jsonify(comment_list), 200
 
 if __name__ == '__main__':
-    # app = WsgiToAsgi(app)
     app.run(debug=True)
