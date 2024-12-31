@@ -18,17 +18,6 @@ db = SQLAlchemy(app)
 
 # migrate = Migrate(app, db)  # Initialize Flask-Migrate
 
-
-@app.route('/check-db-health', methods=['GET'])
-def db_health():
-    try:
-        responses = FormResponse.query.all()
-        db.execute('SELECT 1')  # Simple query to test the database connection
-        db.close()  # Always close the connection
-        return "Database is alive", 200
-    except Exception as e:
-        return f"Error: {e}", 500
-
 @app.route('/')
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
@@ -258,6 +247,16 @@ def get_user_comments(user_username):
     comments = GuestComment.query.filter_by(user_username=user_username).all()
     comment_list = [{'user_username': c.user_username, 'comment': c.comment} for c in comments]
     return jsonify(comment_list), 200
+
+@app.route('/check-db-health', methods=['GET'])
+def db_health():
+    try:
+        # responses = FormResponse.query.all()
+        db.execute('SELECT 1')  # Simple query to test the database connection
+        db.close()  # Always close the connection
+        return "Database is alive", 200
+    except Exception as e:
+        return f"Error: {e}", 500
 
 if __name__ == '__main__':
     app.run(debug=True)
