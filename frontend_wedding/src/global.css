@@ -877,7 +877,7 @@ button:hover {
   width: 75%; /* Set a narrow width */
   /* min-width: 250px;
   max-width: 500px; */
-  margin: 8px auto; /* Center the container horizontally */
+  margin: 20px auto; /* Center the container horizontally */
   padding: 0 20px; /* Optional: Add some padding for spacing */
   border: 1px solid #ffffff; /* Optional: Add a border for visual clarity */
   box-shadow: -2px 0 4px rgba(192, 175, 170, 0.59); /* Optional: Add a subtle shadow */
@@ -1275,7 +1275,7 @@ button:hover {
 .drop-effect {
   animation: drop 2s ease forwards; /* 1 second duration, ease in */
   text-align: center; /* Center text */
-  animation-delay: 3s;
+  animation-delay: 1.6s;
   opacity: 0;
   color: rgba(30, 29, 29, 0.699)
 }
@@ -1325,8 +1325,8 @@ button:hover {
   max-height: 500px; /* or a value large enough to fit the content */
   /* margin-left: 18px; */
   margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   max-width: 250px;
   color:rgb(83, 83, 83);
 }
@@ -1415,7 +1415,8 @@ button:hover {
   padding: 20px;
   border-radius: 8px;
   border: 1px solid #ffffff;
-  box-shadow: 0 4px 15px rgba(134, 84, 129, 0.217);
+  /*box-shadow: 0 4px 15px rgba(134, 84, 129, 0.217);*/
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   min-width: 0;
   max-width: calc(49% - 20px);

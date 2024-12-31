@@ -58,7 +58,7 @@ const GuestDetails = () => {
         const data = await response.json();
         if (response.ok) {
           setUserMessage(data.message);
-          console.log('Ispisujem message')  //Called many times, cannot remove it
+          // console.log('Ispisujem message')  //Called many times, cannot remove it
         } else {
           console.error('Error fetching user details:', data.error);
         }
