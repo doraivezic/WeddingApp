@@ -142,7 +142,7 @@ const Admin = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: editingMessage[username] }),
+        body: JSON.stringify({ personal_message: editingMessage[username] }),
       });
       if (response.ok) {
         setUsers((prev) =>
@@ -255,7 +255,7 @@ const Admin = () => {
                   <div className='admin-panel-users-options'>
                     <div style={{display: 'flex'}}>
                       <p style={{marginRight: '10px'}}>Message: </p>
-                      <p style={{fontFamily: 'Arial, sans-serif'}}>{user.message}</p>
+                      <p style={{fontFamily: 'Arial, sans-serif'}}>{user.personal_message}</p>
                     </div>
                     <textarea
                         // value={editingMessage[user.username] || user.message}

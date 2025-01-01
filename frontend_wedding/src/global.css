@@ -769,45 +769,45 @@ button:hover {
       font-size: 12px; /* Smaller font size for small screens */
       width: 5rem;
   }
-  .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
-    font-size: 11px;
-  }
+  /*.tri-state-toggle-button.active.tri-state-toggle-button-noresponse {*/
+  /*  font-size: 11px;*/
+  /*}*/
 }
 @media (max-width: 700px) {
   .tri-state-toggle-button {
       font-size: 11px; /* Even smaller font size for very small screens */
       width: 4rem;
   }
-  .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
-    font-size: 10px;
-  }
+  /*.tri-state-toggle-button.active.tri-state-toggle-button-noresponse {*/
+  /*  font-size: 10px;*/
+  /*}*/
 }
 @media (max-width: 400px) {
   .tri-state-toggle-button {
       font-size: 10px; /* Even smaller font size for very small screens */
       width: 3.5rem;
   }
-  .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
-    font-size: 9px;
-  }
+  /*.tri-state-toggle-button.active.tri-state-toggle-button-noresponse {*/
+  /*  font-size: 9px;*/
+  /*}*/
 }
 @media (max-width: 370px) {
   .tri-state-toggle-button {
       font-size: 9px; /* Even smaller font size for very small screens */
       width: 2.9rem;
   }
-  .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
-    font-size: 8px;
-  }
+  /*.tri-state-toggle-button.active.tri-state-toggle-button-noresponse {*/
+  /*  font-size: 8px;*/
+  /*}*/
 }
 @media (max-width: 300px) {
   .tri-state-toggle-button {
       font-size: 9px; /* Even smaller font size for very small screens */
       width: 2.7rem;
   }
-  .tri-state-toggle-button.active.tri-state-toggle-button-noresponse {
-    font-size: 8px;
-  }
+  /*.tri-state-toggle-button.active.tri-state-toggle-button-noresponse {*/
+  /*  font-size: 8px;*/
+  /*}*/
 }
 
 .tri-state-toggle-button:hover {
@@ -865,6 +865,11 @@ button:hover {
                         ); */
   color: rgb(178, 176, 176);
   font-weight: bold;
+}
+.tri-state-toggle-button-noresponse{
+  font-size: 30px;
+  padding: 0;
+  width: 40px;
 }
 
 
@@ -1441,7 +1446,7 @@ button:hover {
 }
 
 .menu-item p {
-  margin: 3px 0;
+  margin: 4px 0;
   font-family: 'Manrope';
   font-weight: 1;
   font-size: 0.99rem;

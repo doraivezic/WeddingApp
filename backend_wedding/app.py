@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, send_from_directory
+from sqlalchemy import ForeignKeyConstraint
 import os
 
 # app = Flask(__name__)
@@ -22,74 +23,133 @@ migrate = Migrate(app, db)  # Initialize Flask-Migrate
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
+
+# -----------------------------
+# 1) USER MODEL
+# -----------------------------
 class User(db.Model):
+    __tablename__ = 'user'  # Ensure the table name is correct
+
     username = db.Column(db.String(80), primary_key=True)
     password_hash = db.Column(db.String(200), nullable=False)
     role = db.Column(db.String(20), nullable=False)
     personal_message = db.Column(db.String(500))
 
+    # Relationships
     comments = db.relationship(
         'GuestComment',
         back_populates='user',
-        passive_deletes=True  # if you want cascade deletes
+        passive_deletes=True
     )
+
     namesurnames = db.relationship(
         'NameSurname',
         back_populates='user',
-        passive_deletes=True  # if you want cascade deletes
-    )
-    responses = db.relationship(  #form responses
-        'FormResponse',
-        back_populates='user_rel',
-        passive_deletes=True  # if you want cascade deletes
+        passive_deletes=True
     )
 
+    responses = db.relationship(
+        'FormResponse',
+        back_populates='user_rel',
+        foreign_keys='FormResponse.user_username',
+        passive_deletes=True
+    )
+
+    # Methods
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+
+# -----------------------------
+# 2) NAME_SURNAME MODEL
+# -----------------------------
 class NameSurname(db.Model):
-    user_username = db.Column(db.String(80), db.ForeignKey('user.username', ondelete='CASCADE'), primary_key=True)
-    name_surname = db.Column(db.String(100), unique=True, nullable=False, primary_key=True)
-    # user = db.relationship('User', backref=db.backref('namesurnames', lazy=True))
+    __tablename__ = 'name_surname'
+
+    user_username = db.Column(
+        db.String(80),
+        db.ForeignKey('user.username', ondelete='CASCADE'),
+        primary_key=True
+    )
+    name_surname = db.Column(db.String(100), nullable=False, primary_key=True)
+
+    # Relationship back to User
     user = db.relationship(
         'User',
-        back_populates='namesurnames',
-    )
-    responses = db.relationship(  # form responses
-        'FormResponse',
-        back_populates='name_surname_rel',
+        back_populates='namesurnames'
     )
 
+    # Relationship to FormResponse
+    responses = db.relationship(
+        'FormResponse',
+        back_populates='name_surname_rel'
+    )
+
+
+# -----------------------------
+# 3) FORM_RESPONSE MODEL
+# -----------------------------
 class FormResponse(db.Model):
-    name_surname = db.Column(db.String(100), db.ForeignKey('name_surname.name_surname', ondelete='CASCADE'), primary_key=True)
-    user_username = db.Column(db.String(80), db.ForeignKey('user.username', ondelete='CASCADE'), primary_key=True)
-    accepted = db.Column(db.Boolean, nullable=True)  # stavila sam na nullable True jer zelim da je na pocetku True
+    __tablename__ = 'form_response'
+
+    # Columns
+    user_username = db.Column(
+        db.String(80),
+        db.ForeignKey('user.username', ondelete='CASCADE'),
+        primary_key=True
+    )
+    name_surname = db.Column(db.String(100), primary_key=True)
+    accepted = db.Column(db.Boolean, nullable=True)
     menu_option = db.Column(db.String(80), nullable=True)
     allergies = db.Column(db.String(500), nullable=True)
     comment = db.Column(db.String(500), nullable=True)
 
-    # name_surname_rel = db.relationship('NameSurname', backref=db.backref('responses', lazy=True))
-    name_surname_rel = db.relationship(
-        'NameSurname',
-        back_populates='responses'
+    # Composite Foreign Key to NameSurname
+    __table_args__ = (
+        ForeignKeyConstraint(
+            ['user_username', 'name_surname'],
+            ['name_surname.user_username', 'name_surname.name_surname'],
+            ondelete='CASCADE'
+        ),
     )
 
-    # user_rel = db.relationship('User', backref=db.backref('responses', lazy=True))
+    # Relationship back to User
     user_rel = db.relationship(
         'User',
-        back_populates='responses'
+        back_populates='responses',
+        foreign_keys=[user_username]
     )
 
+    # Relationship back to NameSurname
+    name_surname_rel = db.relationship(
+        'NameSurname',
+        back_populates='responses',
+        foreign_keys=[user_username, name_surname]
+    )
+
+
+# -----------------------------
+# 4) GUEST_COMMENT MODEL
+# -----------------------------
 class GuestComment(db.Model):
-    user_username = db.Column(db.String(80), db.ForeignKey('user.username', ondelete='CASCADE'), primary_key=True)
+    __tablename__ = 'guest_comment'
+
+    user_username = db.Column(
+        db.String(80),
+        db.ForeignKey('user.username', ondelete='CASCADE'),
+        primary_key=True
+    )
     comment = db.Column(db.String(500), nullable=False, primary_key=True)
+
+    # Relationship back to User
     user = db.relationship(
         'User',
         back_populates='comments'
     )
+
 
 # Create initial admin user
 # with app.app_context():
@@ -162,15 +222,46 @@ def get_all_name_surnames():
     name_surname_list = [{'user_username': ns.user_username, 'name_surname': ns.name_surname} for ns in namesurnames]
     return jsonify(name_surname_list), 200
 
+
 @app.route('/api/namesurnames', methods=['POST'])
 def add_name_surname():
     data = request.json
-    if NameSurname.query.filter_by(name_surname=data['name_surname']).first():
-        return jsonify({'error': 'Name and surname already exists'}), 400
-    new_name_surname = NameSurname(user_username=data['user_username'], name_surname=data['name_surname'])
-    db.session.add(new_name_surname)
-    db.session.commit()
-    return jsonify({'name_surname': new_name_surname.name_surname, 'message': 'Name and surname added successfully'}), 201
+
+    # Validate incoming data
+    if not data or not data.get('user_username') or not data.get('name_surname'):
+        return jsonify({'error': 'user_username and name_surname are required'}), 400
+
+    user_username = data['user_username']
+    name_surname = data['name_surname']
+
+    # Check if the name_surname already exists for the given user_username
+    existing_entry = NameSurname.query.filter_by(
+        user_username=user_username,
+        name_surname=name_surname
+    ).first()
+
+    if existing_entry:
+        return jsonify({'error': 'Name and surname already exists for this user'}), 400
+
+    # Create and add the new NameSurname entry
+    new_name_surname = NameSurname(
+        user_username=user_username,
+        name_surname=name_surname
+    )
+
+    try:
+        db.session.add(new_name_surname)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        # Log the error for debugging (optional)
+        app.logger.error(f"Error adding NameSurname: {e}")
+        return jsonify({'error': 'Database error: ' + str(e)}), 500
+
+    return jsonify({
+        'name_surname': new_name_surname.name_surname,
+        'message': 'Name and surname added successfully'
+    }), 201
 
 @app.route('/api/namesurnames/<name_surname>', methods=['DELETE'])
 def delete_name_surname(name_surname):

@@ -56,8 +56,9 @@ const GuestDetails = () => {
       try {
         const response = await fetch(`${apiUrl}/api/users/${userUsername}`);
         const data = await response.json();
+        console.log(data);
         if (response.ok) {
-          setUserMessage(data.message);
+          setUserMessage(data.personal_message);
           // console.log('Ispisujem message')  //Called many times, cannot remove it
         } else {
           console.error('Error fetching user details:', data.error);
@@ -431,20 +432,20 @@ const GuestDetails = () => {
                 <p>•</p>
                 <p> Krem juha od celera, jabuke i tartufa</p>
                 <p>•</p>
-                <p>File bijele ribe u škartocu sa povrćem i pave krumpirom</p>
+                <p>File bijele ribe u škartocu s povrćem i pave krumpirom</p>
                 <p>•</p>
-                <p>Šurlice sa kozicama</p>
+                <p>Šurlice s kozicama</p>
               </div>
             </div>
 
             <div className="menu-item">
               <h4>{language === 'en' ? 'Meat Menu' : 'Mesni  Meni'}</h4>
               <div className="meat-menu" >
-                <p>Rolica od skute i pršuta, krčka kobasicam vege tartar, selekcija sireva, pikantna salsa, domaći kruh</p>
+                <p>Rolica od skute i pršuta, krčka kobasica, vege tartar, selekcija sireva, pikantna salsa, domaći kruh</p>
                 <p>•</p>
                 <p>Krem juha od celera, jabuke i tartufa</p>
                 <p>•</p>
-                <p>Sporo pečena teletina sa demiglas umakom i pave krumpirom</p>
+                <p>Sporo pečena teletina s demi-glace umakom i pave krumpirom</p>
                 <p>•</p>
                 <p>Šurlice s gulašom</p>
               </div>
@@ -458,9 +459,9 @@ const GuestDetails = () => {
           <h3>{language === 'en' ? 'Accept invitation' : 'Potvrdite dolazak'}</h3>
           <p className='confirm-arrival'>
             {language === 'en' ? (
-                <>PLEASE CONFIRM YOUR ARRIVAL UNTIL <b>31.01.2025.</b></>
+                <>PLEASE CONFIRM YOUR ARRIVAL UNTIL <b>{userMessage}</b></>
             ) : (
-                <>MOLIMO POTVRDITE SVOJ DOLAZAK DO <b>31.01.2025.</b></>
+                <>MOLIMO POTVRDITE SVOJ DOLAZAK DO <b>{userMessage}</b></>
             )}
           </p>
           <p className='confirm-arrival' style={{color: "gray", fontSize: '12px'}}>
@@ -501,7 +502,7 @@ const GuestDetails = () => {
                           className={`tri-state-toggle-button ${response.accepted === null ? 'active' : ''} tri-state-toggle-button-noresponse`}
                           onClick={() => handleResponseChange(index, 'accepted', null)}
                       >
-                        {language === 'en' ? (<>NO<br/>RESPONSE</>) : (<>BEZ<br/>ODGOVORA</>)}
+                        {/*{language === 'en' ? (<>NO<br/>RESPONSE</>) : (<>BEZ<br/>ODGOVORA</>)}*/}-
                       </button>
 
                       <button
