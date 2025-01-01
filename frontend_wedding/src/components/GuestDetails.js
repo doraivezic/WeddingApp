@@ -285,7 +285,7 @@ const GuestDetails = () => {
 
           <tr>
             <td className="icon" style={{paddingLeft: '10px'}}>
-              <img src='/boat-icon.svg' alt="Boat"/>
+              <img src="/boat-icon.svg" alt="Boat" style={{transform: 'rotate(-90deg)', width: '9em'}}/>
             </td>
             <td className="event-content">
               <h3 className='table-event-name'>{language === 'en' ? 'Boat ride' : 'Vožnja brodom'}</h3>
@@ -320,14 +320,14 @@ const GuestDetails = () => {
                 <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
               </a>
             </td>
-            <td className="icon" style={{paddingRight: '10px'}}>
-              <img src='/ring-icon.svg' alt="Rings" style={{transform: 'rotate(-45deg)'}}/>
+            <td className="icon">
+              <img src='/ring-icon.svg' alt="Rings" style={{width: '11em'}}/>
             </td>
           </tr>
 
           <tr>
             <td className="icon" style={{paddingLeft: '10px'}}>
-              <img src='/restaurant-icon.svg' alt="Dinner"/>
+              <img src='/restaurant-icon.svg' alt="Dinner" style={{width: '9em'}}/>
             </td>
             <td className="event-content">
               <h3 className='table-event-name'>{language === 'en' ? 'Dinner' : 'Svečana večera'}</h3>
@@ -397,11 +397,13 @@ const GuestDetails = () => {
           <h3>{language === 'en' ? 'Dress code' : 'Dress code'}</h3>
           <div className="dress-code-container">
             <div className="dress-code-emoji-container">
-              <span role="img" aria-label="suit">💃</span>
-              <span role="img" aria-label="suit">🕺</span>
+              {/*<span role="img" aria-label="suit">💃</span>*/}
+              {/*<span role="img" aria-label="suit">🕺</span>*/}
+              <img src='/dress-removebg-preview.ico' alt="Dress" style={{width:'3rem', height: 'auto'}}/>
+              <img src='/suit-removebg-preview.ico' alt="Dress" style={{width:'3rem', height: 'auto'}}/>
             </div>
             <p className="dress-code-text">
-              {language === 'en' ? (
+            {language === 'en' ? (
                 <>
                   If possible, we kindly ask you to wear colorful attire!<br/>
                   Let's avoid dark colors and celebrate with vibrant hues<br/>
@@ -442,7 +444,7 @@ const GuestDetails = () => {
                 <p>•</p>
                 <p>Krem juha od celera, jabuke i tartufa</p>
                 <p>•</p>
-                <p>Sporo pečena teletina sa demiglas umakom i pave krumpitom</p>
+                <p>Sporo pečena teletina sa demiglas umakom i pave krumpirom</p>
                 <p>•</p>
                 <p>Šurlice s gulašom</p>
               </div>
