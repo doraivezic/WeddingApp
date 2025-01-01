@@ -515,8 +515,8 @@ const GuestDetails = () => {
                   </div>
 
                   {/* Rest of the form, once the guest accepts the invite */}
-                  <div className={`transition-container ${response.accepted === true ? 'show' : ''}`}>
-                    <label className='guest-input-menu'>
+                  <div className={`transition-container ${response.accepted === true ? 'show' : ''}`} style={{ margin: '0 auto'}} >
+                    <label className='guest-input-menu' style={{marginTop: '20px'}}>
                       {language === 'en' ? 'MENU OPTION:' : 'ODABIR MENIJA:'}
                       <select className='select-line'
                           value={response.menu_option}
@@ -535,7 +535,7 @@ const GuestDetails = () => {
                       </select>
                     </label>
 
-                    <label className='guest-input-menu'>
+                    <label className='guest-input-menu' style={{marginBottom: '20px'}}>
                       {language === 'en' ? 'ALLERGIES:' : 'ALERGIJE:'}
                       <input
                           className='select-line'

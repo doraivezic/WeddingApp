@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-# from flask_migrate import Migrate
+from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, send_from_directory
 import os
@@ -16,7 +16,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-# migrate = Migrate(app, db)  # Initialize Flask-Migrate
+migrate = Migrate(app, db)  # Initialize Flask-Migrate
 
 @app.route('/')
 def serve():
@@ -26,7 +26,23 @@ class User(db.Model):
     username = db.Column(db.String(80), primary_key=True)
     password_hash = db.Column(db.String(200), nullable=False)
     role = db.Column(db.String(20), nullable=False)
-    message = db.Column(db.String(500))
+    personal_message = db.Column(db.String(500))
+
+    comments = db.relationship(
+        'GuestComment',
+        back_populates='user',
+        passive_deletes=True  # if you want cascade deletes
+    )
+    namesurnames = db.relationship(
+        'NameSurname',
+        back_populates='user',
+        passive_deletes=True  # if you want cascade deletes
+    )
+    responses = db.relationship(  #form responses
+        'FormResponse',
+        back_populates='user_rel',
+        passive_deletes=True  # if you want cascade deletes
+    )
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -35,53 +51,74 @@ class User(db.Model):
         return check_password_hash(self.password_hash, password)
 
 class NameSurname(db.Model):
-    user_username = db.Column(db.String(80), db.ForeignKey('user.username'), primary_key=True)
+    user_username = db.Column(db.String(80), db.ForeignKey('user.username', ondelete='CASCADE'), primary_key=True)
     name_surname = db.Column(db.String(100), unique=True, nullable=False, primary_key=True)
-    user = db.relationship('User', backref=db.backref('namesurnames', lazy=True))
+    # user = db.relationship('User', backref=db.backref('namesurnames', lazy=True))
+    user = db.relationship(
+        'User',
+        back_populates='namesurnames',
+    )
+    responses = db.relationship(  # form responses
+        'FormResponse',
+        back_populates='name_surname_rel',
+    )
 
 class FormResponse(db.Model):
-    name_surname = db.Column(db.String(100), db.ForeignKey('name_surname.name_surname'), primary_key=True)
-    user_username = db.Column(db.String(80), db.ForeignKey('user.username'), primary_key=True)
+    name_surname = db.Column(db.String(100), db.ForeignKey('name_surname.name_surname', ondelete='CASCADE'), primary_key=True)
+    user_username = db.Column(db.String(80), db.ForeignKey('user.username', ondelete='CASCADE'), primary_key=True)
     accepted = db.Column(db.Boolean, nullable=True)  # stavila sam na nullable True jer zelim da je na pocetku True
     menu_option = db.Column(db.String(80), nullable=True)
     allergies = db.Column(db.String(500), nullable=True)
     comment = db.Column(db.String(500), nullable=True)
-    name_surname_rel = db.relationship('NameSurname', backref=db.backref('responses', lazy=True))
-    user_rel = db.relationship('User', backref=db.backref('responses', lazy=True))
+
+    # name_surname_rel = db.relationship('NameSurname', backref=db.backref('responses', lazy=True))
+    name_surname_rel = db.relationship(
+        'NameSurname',
+        back_populates='responses'
+    )
+
+    # user_rel = db.relationship('User', backref=db.backref('responses', lazy=True))
+    user_rel = db.relationship(
+        'User',
+        back_populates='responses'
+    )
 
 class GuestComment(db.Model):
-    user_username = db.Column(db.String(80), db.ForeignKey('user.username'), primary_key=True)
+    user_username = db.Column(db.String(80), db.ForeignKey('user.username', ondelete='CASCADE'), primary_key=True)
     comment = db.Column(db.String(500), nullable=False, primary_key=True)
-    user = db.relationship('User', backref=db.backref('comments', lazy=True))
+    user = db.relationship(
+        'User',
+        back_populates='comments'
+    )
 
 # Create initial admin user
-with app.app_context():
-    db.create_all()
-    if not User.query.filter_by(username='admin').first():
-        admin = User(username='admin', role='admin')
-        admin.set_password('admin123')
-        db.session.add(admin)
-        db.session.commit()
+# with app.app_context():
+#     db.create_all()
+#     if not User.query.filter_by(username='admin').first():
+#         admin = User(username='admin', role='admin')
+#         admin.set_password('password_admin123')
+#         db.session.add(admin)
+#         db.session.commit()
 
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.json
     user = User.query.filter_by(username=data['username']).first()
     if user and user.check_password(data['password']):
-        return jsonify({'role': user.role, 'message': user.message, 'username': user.username}), 200
+        return jsonify({'role': user.role, 'personal_message': user.personal_message, 'username': user.username}), 200
     return jsonify({'error': 'Invalid credentials'}), 401
 
 @app.route('/api/users', methods=['GET'])
 def get_users():
     users = User.query.all()
-    user_list = [{'username': user.username, 'role': user.role, 'message': user.message} for user in users]
+    user_list = [{'username': user.username, 'role': user.role, 'personal_message': user.personal_message} for user in users]
     return jsonify(user_list), 200
 
 @app.route('/api/users/<username>', methods=['GET'])
 def get_user(username):
     user = User.query.filter_by(username=username).first()
     if user:
-        return jsonify({'username': user.username, 'message': user.message}), 200
+        return jsonify({'username': user.username, 'personal_message': user.personal_message}), 200
     return jsonify({'error': 'User not found'}), 404
 
 @app.route('/api/users', methods=['POST'])
@@ -89,7 +126,7 @@ def add_user():
     data = request.json
     if User.query.filter_by(username=data['username']).first():
         return jsonify({'error': 'Username already exists'}), 400
-    new_user = User(username=data['username'], role='guest', message=data.get('message', ''))
+    new_user = User(username=data['username'], role=data['role'], personal_message=data.get('personal_message', ''))  #role can be admin or guest
     new_user.set_password(data['password'])
     db.session.add(new_user)
     db.session.commit()
@@ -99,8 +136,9 @@ def add_user():
 def delete_user(username):
     user = User.query.filter_by(username=username).first()
     if user:
-        if user.role == 'admin':
-            return jsonify({'error': 'Cannot delete admin user'}), 403
+        # TODO make admin deleteable only if there is no admin user
+        # if user.role == 'admin':
+        #     return jsonify({'error': 'Cannot delete admin user'}), 403   # keep the possibility to delete admin
         db.session.delete(user)
         db.session.commit()
         return jsonify({'message': 'User deleted successfully'}), 200
@@ -111,7 +149,7 @@ def update_user(username):
     user = User.query.filter_by(username=username).first()
     data = request.json
     if user:
-        user.message = data.get('message', user.message)
+        user.personal_message = data.get('personal_message', user.personal_message)
         if 'password' in data:
             user.set_password(data['password'])
         db.session.commit()

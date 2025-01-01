@@ -13,7 +13,7 @@ const Admin = () => {
   const [comments, setComments] = useState([]);
   const [newNameSurname, setNewNameSurname] = useState('');
   const [editingMessage, setEditingMessage] = useState({});
-  const [newUser, setNewUser] = useState({ username: '', password: '' });
+  const [newUser, setNewUser] = useState({ username: '', password: '', role: 'guest' });
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -21,7 +21,8 @@ const Admin = () => {
         const response = await fetch(`${apiUrl}/api/users`);
         const data = await response.json();
         if (response.ok) {
-          setUsers(data.filter(user => user.role !== 'admin'));
+          // setUsers(data.filter(user => user.role !== 'admin'));
+          setUsers(data);
         } else {
           console.error('Error fetching users:', data.error);
         }
@@ -159,7 +160,12 @@ const Admin = () => {
   };
 
   const handleAddUser = async () => {
-    if (newUser.username.trim() === '' || newUser.password.trim() === '') return;
+    if (newUser.username.trim() === '' ||
+        newUser.password.trim() === '' ||
+        ( newUser.role !== 'admin' && newUser.role !== 'guest') ) {
+      console.error('Cannot add that user:', newUser);
+      return;
+      }
     try {
       const response = await fetch(`${apiUrl}/api/users`, {
         method: 'POST',
@@ -170,8 +176,9 @@ const Admin = () => {
       });
       if (response.ok) {
         const newUserObj = await response.json();
+        console.log('Added user:', newUser);
         setUsers((prev) => [...prev, { username: newUserObj.username, message: '' }]);
-        setNewUser({ username: '', password: '' });
+        setNewUser({ username: '', password: '', role: 'guest' });
       } else {
         console.error('Error adding user:', response.error);
       }
@@ -239,31 +246,32 @@ const Admin = () => {
             <li key={user.username}>
               <div>
                 <strong>{user.username}</strong>
+                <div>{user.role}</div>
                 <button onClick={() => handleDeleteUser(user.username)} className='trash-icon-user'>
-                  <FontAwesomeIcon icon={faTrash} />
+                  <FontAwesomeIcon icon={faTrash}/>
                 </button>
                 <div className='admin-panel-users-container'>
 
                   <div className='admin-panel-users-options'>
                     <div style={{display: 'flex'}}>
-                      <p style={{ marginRight: '10px' }}>Message: </p>
-                      <p style={{ fontFamily: 'Arial, sans-serif' }}>{user.message}</p>
+                      <p style={{marginRight: '10px'}}>Message: </p>
+                      <p style={{fontFamily: 'Arial, sans-serif'}}>{user.message}</p>
                     </div>
                     <textarea
-                      // value={editingMessage[user.username] || user.message}
-                      onChange={(e) => handleEditMessage(user.username, e.target.value)}
-                      placeholder="Enter Message for User"
+                        // value={editingMessage[user.username] || user.message}
+                        onChange={(e) => handleEditMessage(user.username, e.target.value)}
+                        placeholder="Enter Message for User"
                     />
                     <button onClick={() => handleUpdateUser(user.username)}>Update message</button>
                   </div>
 
                   <div className='admin-panel-users-options'>
                     <input
-                      type="text"
-                      value={newNameSurname}
-                      onChange={(e) => setNewNameSurname(e.target.value)}
-                      placeholder="New guest"
-                      style={{marginBottom: '2px', marginTop: '4px'}}
+                        type="text"
+                        value={newNameSurname}
+                        onChange={(e) => setNewNameSurname(e.target.value)}
+                        placeholder="New guest"
+                        style={{marginBottom: '2px', marginTop: '4px'}}
                     />
                     <button onClick={() => handleAddNameSurname(user.username)}>Add guest</button>
                   </div>
@@ -271,15 +279,16 @@ const Admin = () => {
                   <div>
                     <ul>
                       {nameSurnames
-                        .filter((ns) => ns.user_username === user.username)
-                        .map((ns) => (
-                          <li key={ns.id}>
-                            {ns.name_surname}
-                            <button onClick={() => handleDeleteNameSurname(ns.name_surname)} className='trash-icon-guest'>
-                              <FontAwesomeIcon icon={faTrash} />
-                            </button>
-                          </li>
-                        ))}
+                          .filter((ns) => ns.user_username === user.username)
+                          .map((ns) => (
+                              <li key={ns.id}>
+                                {ns.name_surname}
+                                <button onClick={() => handleDeleteNameSurname(ns.name_surname)}
+                                        className='trash-icon-guest'>
+                                  <FontAwesomeIcon icon={faTrash}/>
+                                </button>
+                              </li>
+                          ))}
                     </ul>
                   </div>
                 </div>
@@ -292,22 +301,30 @@ const Admin = () => {
       <div className="admin-panel add-user">
         <h3 id="section-add-user" style={{marginBottom: '25px', whiteSpace: 'nowrap'}}>Add New User</h3>
         <input
-          type="text"
-          placeholder="Username"
-          value={newUser.username}
-          onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
-          style={{width: '20%', minWidth: '150px'}}
+            type="text"
+            placeholder="Username"
+            value={newUser.username}
+            onChange={(e) => setNewUser({...newUser, username: e.target.value})}
+            style={{width: '20%', minWidth: '150px'}}
         />
         <input
-          type="text"
-          placeholder="Password"
-          value={newUser.password}
-          onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-          style={{width: '20%', minWidth: '150px'}}
+            type="text"
+            placeholder="Password"
+            value={newUser.password}
+            onChange={(e) => setNewUser({...newUser, password: e.target.value})}
+            style={{width: '20%', minWidth: '150px'}}
         />
+        <select
+            value={newUser.role || 'guest'} // Default to 'guest' if no role is set
+            onChange={(e) => setNewUser({...newUser, role: e.target.value})}
+            style={{width: '20%', minWidth: '150px'}}
+        >
+          <option value="guest">Guest</option>
+          <option value="admin">Admin</option>
+        </select>
         <button onClick={handleAddUser} style={{margin: '0 auto'}}>Add User</button>
       </div>
-    
+
       {/* <div className="admin-panel">
         <h3 id="section-fulfilled-forms">Fulfilled forms</h3>
         <ul>

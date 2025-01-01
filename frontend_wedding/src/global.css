@@ -900,13 +900,15 @@ button:hover {
 .guests-forms-name {
   margin-right: 5px;
   font-family: 'WindSong';
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: 500;
   white-space: nowrap;
+  padding-left: 10px;
 }
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .guests-forms-name {
     font-size: 1.5rem;
+    padding-left: 0;
   }
 }
 
@@ -916,6 +918,7 @@ button:hover {
   white-space: nowrap; 
   font-weight: 400;
   padding: 1px;
+  font-size: 0.89rem;
 }
 @media (max-width: 700px) {
   .guest-input-menu {
@@ -1120,7 +1123,7 @@ button:hover {
 }
 
 .icon img {
-  width: 6em; /* Adjusted width for icons */
+  width: 8em; /* Adjusted width for icons */
   height: auto; /* Maintain aspect ratio */
   /*max-width: 100%; /* Ensure it doesn't exceed the container's width */
   margin-bottom: 6rem;
@@ -1316,19 +1319,23 @@ button:hover {
 
 
 .transition-container {
-  max-height: 0;
+  max-height: 0px;
   overflow: hidden;
   transition: max-height 2s ease-in-out;
+  max-width: 250px;
 }
-
 .transition-container.show {
   max-height: 500px; /* or a value large enough to fit the content */
-  /* margin-left: 18px; */
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
   max-width: 250px;
   color:rgb(83, 83, 83);
+}
+@media (max-width: 400px) {
+  .transition-container {
+    max-width: 200px;
+  }
+  .transition-container.show {
+    max-width: 200px;
+  }
 }
 
 
