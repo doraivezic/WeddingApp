@@ -291,13 +291,13 @@ const GuestDetails = () => {
               </a>
             </td>
             <td className="icon" style={{paddingLeft: '10px'}}>
-              <img src='/cocktail-icon.svg' alt="Cocktail"/>
+              <img src='/cocktail-icon.svg' alt="Cocktail" className='cocktail-icon'/>
             </td>
           </tr>
 
           <tr>
             <td className="icon" style={{paddingLeft: '10px'}}>
-              <img src="/boat-icon.svg" alt="Boat" style={{transform: 'rotate(-90deg)', width: '9em'}}/>
+              <img src="/boat-icon.svg" alt="Boat" className="boat-icon" style={{transform: 'rotate(-90deg)', paddingRight: '25px'}}/>
             </td>
             <td className="event-content">
               <h3 className='table-event-name'>{language === 'en' ? 'Boat ride' : 'Vožnja brodom'}</h3>
@@ -332,17 +332,17 @@ const GuestDetails = () => {
                 <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
               </a>
             </td>
-            <td className="icon">
-              <img src='/ring-icon.svg' alt="Rings" style={{width: '11em'}}/>
+            <td className="icon ring-icon">
+              <img src='/ring-icon.svg' alt="Rings" className={'ring-icon'}/>
             </td>
           </tr>
 
           <tr>
             <td className="icon" style={{paddingLeft: '10px'}}>
-              <img src='/restaurant-icon.svg' alt="Dinner" style={{width: '9em'}}/>
+              <img src='/restaurant-icon.svg' alt="Dinner" className='restaurant-icon'/>
             </td>
             <td className="event-content">
-              <h3 className='table-event-name'>{language === 'en' ? 'Dinner' : 'Svečana večera'}</h3>
+            <h3 className='table-event-name'>{language === 'en' ? 'Dinner' : 'Svečana večera'}</h3>
               <div className="time-line right-time-line">
                 <div className="line"></div>
                 <div className="time">15:00</div>
