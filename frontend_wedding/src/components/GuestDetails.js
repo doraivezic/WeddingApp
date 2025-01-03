@@ -250,12 +250,23 @@ const GuestDetails = () => {
 
         <div className="quote-container" style={{minWidth: '300px'}}>
           <div className="quote-text">
-          <p className="drop-effect">
-            U Tvoje ruke stavljamo sve na dar,<br/>
-            sve svoje dane, ljubavi i planove.<br/>
-            Nova obitelj tu nastaje pred Tobom.<br/>
-            Ti čuvaj, vodi je!<br/>
-          </p>
+            <p className="drop-effect">
+              {language === 'en' ? (
+                  <>
+                    Into Your hands, we place everything as a gift,<br/>
+                    our days, our love, and every dream.<br/>
+                    A new family begins here before You.<br/>
+                    Guard it, guide it!<br/>
+                  </>
+              ) : (
+                  <>
+                    U Tvoje ruke stavljamo sve na dar,<br/>
+                    sve svoje dane, ljubavi i planove.<br/>
+                    Nova obitelj tu nastaje pred Tobom.<br/>
+                    Ti čuvaj, vodi je!<br/>
+                  </>
+              )}
+            </p>
 
           </div>
         </div>
@@ -425,31 +436,63 @@ const GuestDetails = () => {
           <h3>{language === 'en' ? 'Menu' : 'Meni'}</h3>
           <div className="menu-container">
 
-            <div className="menu-item" >
-              <h4>{language === 'en' ? 'Fish Menu' : 'Riblji  Meni'}</h4>
-              <div className="fish-menu" >
-                <p>Koktel od škampi, kuglica od brancina, dimljena tuna, domaći kruh</p>
-                <p>•</p>
-                <p> Krem juha od celera, jabuke i tartufa</p>
-                <p>•</p>
-                <p>File bijele ribe u škartocu s povrćem i pave krumpirom</p>
-                <p>•</p>
-                <p>Šurlice s kozicama</p>
+            <div className="menu-item">
+              <h4>{language === 'en' ? 'Fish Menu' : 'Riblji Meni'}</h4>
+              <div className="fish-menu">
+                {language === 'en' ? (
+                    <>
+                      <p>Shrimp cocktail, sea bass ball, smoked tuna, homemade bread</p>
+                      <p>•</p>
+                      <p>Creamy soup of celery, apple, and truffles</p>
+                      <p>•</p>
+                      <p>White fish fillet en papillote with vegetables and pave potatoes</p>
+                      <p>•</p>
+                      <p>Šurlice pasta with shrimp</p>
+                    </>
+                ) : (
+                    <>
+                      <p>Koktel od škampi, kuglica od brancina, dimljena tuna, domaći kruh</p>
+                      <p>•</p>
+                      <p>Krem juha od celera, jabuke i tartufa</p>
+                      <p>•</p>
+                      <p>File bijele ribe u škartocu s povrćem i pave krumpirom</p>
+                      <p>•</p>
+                      <p>Šurlice s kozicama</p>
+                    </>
+                )}
               </div>
             </div>
 
             <div className="menu-item">
-              <h4>{language === 'en' ? 'Meat Menu' : 'Mesni  Meni'}</h4>
-              <div className="meat-menu" >
-                <p>Rolica od skute i pršuta, krčka kobasica, vege tartar, selekcija sireva, pikantna salsa, domaći kruh</p>
-                <p>•</p>
-                <p>Krem juha od celera, jabuke i tartufa</p>
-                <p>•</p>
-                <p>Sporo pečena teletina s demi-glace umakom i pave krumpirom</p>
-                <p>•</p>
-                <p>Šurlice s gulašom</p>
+              <h4>{language === 'en' ? 'Meat Menu' : 'Mesni Meni'}</h4>
+              <div className="meat-menu">
+                {language === 'en' ? (
+                    <>
+                      <p>Ricotta and prosciutto roll, Krk sausage, veggie tartare, cheese selection, spicy salsa,
+                        homemade bread</p>
+                      <p>•</p>
+                      <p>Creamy soup of celery, apple, and truffles</p>
+                      <p>•</p>
+                      <p>Slow-roasted veal with demi-glace sauce and pave potatoes</p>
+                      <p>•</p>
+                      <p>Šurlice pasta with goulash</p>
+                    </>
+                ) : (
+                    <>
+                      <p>Rolica od skute i pršuta, krčka kobasica, vege tartar, selekcija sireva, pikantna salsa, domaći
+                        kruh</p>
+                      <p>•</p>
+                      <p>Krem juha od celera, jabuke i tartufa</p>
+                      <p>•</p>
+                      <p>Sporo pečena teletina s demi-glace umakom i pave krumpirom</p>
+                      <p>•</p>
+                      <p>Šurlice s gulašom</p>
+                    </>
+                )}
               </div>
             </div>
+
+
           </div>
 
         </div>
