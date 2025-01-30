@@ -282,10 +282,10 @@ const GuestDetails = () => {
                 <div className="line"></div>
               </div>
               <p className='table-location-exact'>
-                Marina Punat
+                Obala 93
                 <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Punat, Krk</p>
               </p>
-              <a href="https://www.google.com/maps/search/?api=1&query=Mairna,Punat,d.o.o.,+Krk"
+              <a href="https://www.google.com/maps?q=45.021759,14.627480"
                  target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
                 <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
               </a>
@@ -306,10 +306,10 @@ const GuestDetails = () => {
                 <div className="time">12:30</div>
               </div>
               <p className='table-location-exact'>
-                Marina Punat
+                Obala 93
                 <p style={{fontWeight: '100', marginBottom: '0', marginTop: '4px'}}>Punat, Krk</p>
               </p>
-              <a href="https://www.google.com/maps/search/?api=1&query=Mairna,Punat,d.o.o.,+Krk"
+              <a href="https://www.google.com/maps?q=45.021759,14.627480"
                  target="_blank" rel="noreferrer" style={{textDecoration: 'none'}}>
                 <button style={{width: '7rem'}}>{language === 'en' ? 'Show on map' : 'Prikaži na karti'}</button>
               </a>
